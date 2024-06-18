@@ -14,6 +14,7 @@
 		3EED72F82C1F2BF000B55F2F /* TodoApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3EED72F62C1F2BF000B55F2F /* TodoApp.xcdatamodeld */; };
 		3EED72FA2C1F2BF200B55F2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EED72F92C1F2BF200B55F2F /* Assets.xcassets */; };
 		3EED72FD2C1F2BF200B55F2F /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 3EED72FC2C1F2BF200B55F2F /* Base */; };
+		3EED731A2C21F7F300B55F2F /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EED73192C21F7F300B55F2F /* TodoItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		3EED72F92C1F2BF200B55F2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3EED72FC2C1F2BF200B55F2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3EED72FE2C1F2BF200B55F2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3EED73192C21F7F300B55F2F /* TodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				3EED72FB2C1F2BF200B55F2F /* LaunchScreen.storyboard */,
 				3EED72FE2C1F2BF200B55F2F /* Info.plist */,
 				3EED72F62C1F2BF000B55F2F /* TodoApp.xcdatamodeld */,
+				3EED73192C21F7F300B55F2F /* TodoItem.swift */,
 			);
 			path = TodoApp;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EED731A2C21F7F300B55F2F /* TodoItem.swift in Sources */,
 				3EED72F22C1F2BF000B55F2F /* ViewController.swift in Sources */,
 				3EED72EE2C1F2BF000B55F2F /* AppDelegate.swift in Sources */,
 				3EED72F02C1F2BF000B55F2F /* SceneDelegate.swift in Sources */,
