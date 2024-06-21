@@ -2,7 +2,7 @@
 //  TodoItem.swift
 //  TodoApp
 //
-//  Created by Александр  Сухинин on 18.06.2024.
+//  Created by Александр  Сухинин on 16.06.2024.
 //
 
 import Foundation
@@ -34,26 +34,19 @@ struct TodoItem{
 }
 
 extension TodoItem{
-    static func parse(json: Any) -> TodoItem?{
-        do {
-            guard let jsonData = json as? Data else {
-                return nil
-            }
-            guard let jsonObject = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any] else {return nil}
-            guard let id = jsonObject["id"] as? String else {return nil}
-            guard let text = jsonObject["text"] as? String else {return nil}
-            let importanceRawValue = jsonObject["importance"] as? String ?? Importance.regular.rawValue
-            guard let importance = Importance(rawValue: importanceRawValue) else {return nil}
-            guard let deadline = jsonObject["deadline"] as? Date? else {return nil}
-            guard let isDone = jsonObject["isDone"] as? Bool else {return nil}
-            let createdAt = Date()
-            let changedAt: Date? = nil
-            let todoItem = TodoItem(id: id, text: text , importance: importance, deadline: deadline, isDone: isDone, createdAt: createdAt, changedAt: changedAt)
-            return todoItem
-        }catch{
-            print(error)
-            return nil
-        }
+static func parse(json: Any) -> TodoItem?{
+        guard let jsonObject = json as? [String: Any] else {return nil}
+        guard let id = jsonObject["id"] as? String else {return nil}
+        guard let text = jsonObject["text"] as? String else {return nil}
+        let importanceRawValue = jsonObject["importance"] as? String ?? Importance.regular.rawValue
+        guard let importance = Importance(rawValue: importanceRawValue) else {return nil}
+        guard let deadline = jsonObject["deadline"] as? Date? else {return nil}
+        guard let isDone = jsonObject["isDone"] as? Bool else {return nil}
+        let createdAt = Date()
+        let changedAt: Date? = nil
+        let todoItem = TodoItem(id: id, text: text , importance: importance, deadline: deadline, isDone: isDone, createdAt: createdAt, changedAt: changedAt)
+        return todoItem
+      
     }
     
     var json: Any{
@@ -64,15 +57,10 @@ extension TodoItem{
             jsonDict["importance"] = self.importance.rawValue
         }
         if let deadline = self.deadline{
-            jsonDict["deadline"] = self.deadline
+            jsonDict["deadline"] = deadline
         }
         jsonDict["isDone"] = self.isDone
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: jsonDict)
-            return jsonData
-        }catch{
-            print(error)
-            return Data()
-        }
+        return jsonDict
     }
 }
+
