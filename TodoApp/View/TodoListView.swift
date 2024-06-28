@@ -21,6 +21,7 @@ struct TodoList: View {
                             isCompleted: item.isDone,
                             importance: item.importance,
                             itemText: item.text,
+                            color: .blue,
                             isHasDeadline: item.deadline != nil ? true : false,
                             deadline: item.deadline ?? Date()
                           

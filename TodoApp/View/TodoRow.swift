@@ -12,6 +12,7 @@ struct TodoRow: View {
     @State var isCompleted: Bool
     var importance: Importance
     var itemText: String
+    var color: Color
     @State var isScreenShown: Bool = false
     var isHasDeadline: Bool 
     var deadline: Date?
@@ -40,6 +41,10 @@ struct TodoRow: View {
                     .foregroundStyle(Color.gray)
                 }
             }
+            Spacer()
+            RoundedRectangle(cornerRadius: 15)
+                .frame(width: 100,height: 5)
+                .foregroundColor(color)
             Spacer()
             Button(action: {isScreenShown.toggle()},
                    label: {
@@ -131,5 +136,6 @@ struct TodoRow: View {
 }
 
 #Preview {
-    TodoRow(id:"asddas", isCompleted: false, importance: .important, itemText: "AAAAAAA", isHasDeadline: false)
+    TodoRow(id:"asddas", isCompleted: false, importance: .important, itemText: "AAAAAAA",
+            color: .blue, isHasDeadline: false)
 }
