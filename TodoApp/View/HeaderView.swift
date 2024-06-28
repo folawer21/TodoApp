@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct HeaderView: View {
+    var count: Int
     var body: some View {
         HStack{
-            Text("Выполнено - ")
+            Text("Выполнено - \(count)")
                 .font(.subheadline)
             
             Spacer()
@@ -25,6 +26,6 @@ struct HeaderView: View {
     }
 }
 
-#Preview {
-    HeaderView()
-}
+//#Preview {
+//    HeaderView()
+//}

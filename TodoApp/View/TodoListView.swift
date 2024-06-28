@@ -12,7 +12,7 @@ struct TodoList: View {
     @StateObject var taskManager: TaskManager
     var body: some View {
             List(){
-                Section(header: HeaderView()){
+                Section(header: HeaderView(count: taskManager.getDoneCount())){
                     ForEach(taskManager.todoitems, id: \.id) { item in
 //                        let item = taskManager.todoitems[index]
 //                        Text("\(item)")

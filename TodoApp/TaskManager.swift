@@ -45,4 +45,26 @@ final class TaskManager: ObservableObject{
         todoitems.removeAll(where: {$0.id == id})
     }
     
+    func getDoneCount() -> Int{
+        return todoitems.filter{
+            $0.isDone == true
+        }.count
+    }
+    
+    func makeComplete(id:String, complete:Bool){
+        guard let index = todoitems.firstIndex(where: { $0.id == id}) else {
+            return
+        }
+        let old = todoitems[index]
+        let new = TodoItem(
+            id: old.id,
+            text: old.text,
+            importance: old.importance,
+            deadline: old.deadline,
+            isDone: complete,
+            createdAt: old.createdAt,
+            changedAt: old.changedAt
+        )
+        todoitems[index] = new
+    }
 }

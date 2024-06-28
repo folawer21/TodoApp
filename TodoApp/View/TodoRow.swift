@@ -19,7 +19,7 @@ struct TodoRow: View {
     @EnvironmentObject var taskManager: TaskManager
     var body: some View {
         HStack{
-            CompleteButton(isCompleted: isCompleted, importance: importance)
+            CompleteButton(isCompleted: $isCompleted, importance: importance)
                 .onTapGesture(perform: completeButtonTapped)
             VStack(alignment: .leading){
                 HStack{
@@ -75,7 +75,9 @@ struct TodoRow: View {
     }
     var completeButton: some View {
         Button(
-            action: {isCompleted.toggle()},
+            action: {isCompleted.toggle()
+                taskManager.makeComplete(id: id, complete: isCompleted)
+                        },
             label: {
                 Image(systemName: "checkmark.circle")
                     .frame(width: 24, height: 24)
@@ -120,6 +122,7 @@ struct TodoRow: View {
     
     func completeButtonTapped(){
         isCompleted.toggle()
+        taskManager.makeComplete(id: id, complete: isCompleted)
     }
     
     func showRefactorView(){

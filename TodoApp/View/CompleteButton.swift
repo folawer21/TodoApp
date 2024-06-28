@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CompleteButton: View {
-   var isCompleted: Bool
+   @Binding var isCompleted: Bool
    var importance: Importance
    
     var body: some View {
@@ -39,8 +39,8 @@ struct CompleteButton: View {
     }
 }
 
-#Preview {
-    CompleteButton(
-        isCompleted: true,
-        importance: Importance.regular)
-}
+//#Preview {
+//    CompleteButton(
+//        isCompleted: true,
+//        importance: Importance.regular)
+//}
