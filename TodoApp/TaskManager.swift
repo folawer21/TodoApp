@@ -59,6 +59,7 @@ final class TaskManager: ObservableObject{
         let new = TodoItem(
             id: old.id,
             text: old.text,
+            color: old.color,
             importance: old.importance,
             deadline: old.deadline,
             isDone: complete,

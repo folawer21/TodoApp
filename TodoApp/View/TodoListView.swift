@@ -21,7 +21,7 @@ struct TodoList: View {
                             isCompleted: item.isDone,
                             importance: item.importance,
                             itemText: item.text,
-                            color: .blue,
+                            color: item.color,
                             isHasDeadline: item.deadline != nil ? true : false,
                             deadline: item.deadline ?? Date()
                           
@@ -46,7 +46,8 @@ struct TodoList: View {
                     byAdding: .day,
                     value: 1,
                     to: Date()
-                ) ?? Date())
+                ) ?? Date()
+                    ,selectedBrightness: 1.0,selectedColor: .blue)
                     .environmentObject(taskManager)
             }
             

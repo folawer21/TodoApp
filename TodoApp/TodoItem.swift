@@ -5,7 +5,7 @@
 //  Created by Александр  Сухинин on 16.06.2024.
 //
 
-import Foundation
+import SwiftUI
 
 enum Importance: String{
     case important = "important"
@@ -19,12 +19,14 @@ struct TodoItem: Identifiable{
     let importance: Importance
     let deadline: Date?
     let isDone: Bool
+    let color: Color
     let createdAt: Date
     let changedAt: Date?
     
-    init(id: String = UUID().uuidString , text: String, importance: Importance, deadline: Date?, isDone: Bool, createdAt: Date, changedAt: Date?) {
+    init(id: String = UUID().uuidString , text: String, color: Color,importance: Importance, deadline: Date?, isDone: Bool, createdAt: Date, changedAt: Date?) {
         self.id = id
         self.text = text
+        self.color = color
         self.importance = importance
         self.deadline = deadline
         self.isDone = isDone
@@ -42,9 +44,10 @@ static func parse(json: Any) -> TodoItem?{
         guard let importance = Importance(rawValue: importanceRawValue) else {return nil}
         guard let deadline = jsonObject["deadline"] as? Date? else {return nil}
         guard let isDone = jsonObject["isDone"] as? Bool else {return nil}
+        guard let color = jsonObject["color"] as? Color else {return nil}
         let createdAt = Date()
         let changedAt: Date? = nil
-        let todoItem = TodoItem(id: id, text: text , importance: importance, deadline: deadline, isDone: isDone, createdAt: createdAt, changedAt: changedAt)
+    let todoItem = TodoItem(id: id, text: text , color:color, importance: importance, deadline: deadline, isDone: isDone, createdAt: createdAt, changedAt: changedAt)
         return todoItem
       
     }
@@ -59,6 +62,7 @@ static func parse(json: Any) -> TodoItem?{
         if let deadline = self.deadline{
             jsonDict["deadline"] = deadline
         }
+        jsonDict["color"] = color
         jsonDict["isDone"] = self.isDone
         return jsonDict
     }

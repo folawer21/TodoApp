@@ -62,6 +62,7 @@ struct TodoRow: View {
                             value: 1,
                             to: Date()
                         ) ?? Date()) ,
+                selectedColor: color,
                 selectedImportance: importance
                 )
             .environmentObject(taskManager)

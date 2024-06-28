@@ -39,8 +39,3 @@ struct CompleteButton: View {
     }
 }
 
-//#Preview {
-//    CompleteButton(
-//        isCompleted: true,
-//        importance: Importance.regular)
-//}
