@@ -10,16 +10,16 @@ import SwiftUI
 struct TodoRow: View {
     var id: String
     @State var isCompleted: Bool
-    @State var importance: Importance
-    @State var itemText: String
+    var importance: Importance
+    var itemText: String
     @State var isScreenShown: Bool = false
-    @State var isHasDeadline: Bool 
-    @State var deadline: Date?
+    var isHasDeadline: Bool 
+    var deadline: Date?
     
     @EnvironmentObject var taskManager: TaskManager
     var body: some View {
         HStack{
-            CompleteButton(isCompleted: $isCompleted, importance: $importance)
+            CompleteButton(isCompleted: isCompleted, importance: importance)
                 .onTapGesture(perform: completeButtonTapped)
             VStack(alignment: .leading){
                 HStack{
@@ -127,6 +127,6 @@ struct TodoRow: View {
     }
 }
 
-//#Preview {
-//    TodoRow(isCompleted: false, importance: .regular)
-//}
+#Preview {
+    TodoRow(id:"asddas", isCompleted: false, importance: .important, itemText: "AAAAAAA", isHasDeadline: false)
+}

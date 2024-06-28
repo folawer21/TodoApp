@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct CompleteButton: View {
-    @Binding var isCompleted: Bool
-    @Binding var importance: Importance
+   var isCompleted: Bool
+   var importance: Importance
    
     var body: some View {
        Circle()
@@ -41,7 +41,6 @@ struct CompleteButton: View {
 
 #Preview {
     CompleteButton(
-        isCompleted: Binding<Bool>.constant(true),
-        importance: Binding<Importance>.constant(.regular)
-    )
+        isCompleted: true,
+        importance: Importance.regular)
 }
