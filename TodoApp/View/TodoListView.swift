@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct TodoList: View {
-    @State var isTapped: Bool = true
+    @State var isMakeNewShown: Bool = false
     var body: some View {
             List(){
                 Section(header: HeaderView()){
-                    ForEach(1..<5, content: {_ in TodoRow(isCompleted: false, importance: .important)})
+                    ForEach(1..<5, content: {_ in TodoRow(isCompleted: false, importance: .regular)})
                     NewItemRowView()
                         .onTapGesture(perform:{ _ in 
-                            isTapped.toggle()
+                            isMakeNewShown.toggle()
                         })
-                        .background(isTapped ? Color.red : Color.green)
+                        
                 }
            
             }
@@ -25,13 +25,17 @@ struct TodoList: View {
             .overlay(alignment: .bottom){
                 plusButton
             }
+            .sheet(isPresented: $isMakeNewShown){
+                TodoProduction()
+            }
+            
             
     }
     
    
     var plusButton: some View {
        Button(action: {
-           isTapped.toggle()
+           isMakeNewShown.toggle()
         },
                label: {
             Image(systemName: "plus")

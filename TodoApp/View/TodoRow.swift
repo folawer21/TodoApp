@@ -11,8 +11,9 @@ struct TodoRow: View {
     @State var isCompleted: Bool
     @State var importance: Importance = .regular
     @State var itemText: String = "Купить сыр!"
-    @State var isShown: Bool = false
+    @State var isScreenShown: Bool = false
     @State var deadline: Date? = Date()
+    
     var body: some View {
         HStack{
             CompleteButton(isCompleted: $isCompleted, importance: $importance)
@@ -37,16 +38,64 @@ struct TodoRow: View {
                 }
             }
             Spacer()
-            Button(action: showRefactorView,
+            Button(action: {isScreenShown.toggle()},
                    label: {
                 Image(systemName: "chevron.right")
             })
             .foregroundColor(.secondary)
         }
-
+        .sheet(isPresented: $isScreenShown){
+            TodoProduction(
+                text: itemText,
+                deadline: deadline ??  Date(),
+                selectedImportance: importance
+            )
+        }
+        .swipeActions(edge: .leading){
+            completeButton
+        }
+        
+        .swipeActions(edge: .trailing){
+            deleteButton
+            infoButton
+        }
+       
+    
      
     }
-    
+    var completeButton: some View {
+        Button(
+            action: {isCompleted.toggle()},
+            label: {
+                Image(systemName: "checkmark.circle")
+                    .frame(width: 24, height: 24)
+                    .foregroundStyle(.green)
+                    .background(.white)
+                    .imageScale(.large)
+                    .fontWeight(.bold)
+            }
+        )
+        .tint(.green)
+    }
+        
+    var deleteButton: some View {
+         Button(
+             action: {},
+             label: {
+                 Image(systemName: "trash.fill")
+             }
+         )
+         .tint(.red)
+     }
+     
+     var infoButton: some View {
+         Button(
+            action: {isScreenShown.toggle()},
+             label: {
+                 Image(systemName: "info.circle.fill")
+             }
+         )
+     }
     var backgroundColor: Color{
         .clear
     }

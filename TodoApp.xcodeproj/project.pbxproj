@@ -25,6 +25,7 @@
 		3EED737B2C2E0AEA00B55F2F /* Extension.isShown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EED737A2C2E0AEA00B55F2F /* Extension.isShown.swift */; };
 		3EED737D2C2E1AEF00B55F2F /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EED737C2C2E1AEF00B55F2F /* TestView.swift */; };
 		3EED737F2C2E23A900B55F2F /* TodoProduction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EED737E2C2E23A900B55F2F /* TodoProduction.swift */; };
+		3EED73812C2E590D00B55F2F /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EED73802C2E590D00B55F2F /* CustomSegmentedControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		3EED737A2C2E0AEA00B55F2F /* Extension.isShown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.isShown.swift; sourceTree = "<group>"; };
 		3EED737C2C2E1AEF00B55F2F /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		3EED737E2C2E23A900B55F2F /* TodoProduction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoProduction.swift; sourceTree = "<group>"; };
+		3EED73802C2E590D00B55F2F /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				3EED73742C2DF4E600B55F2F /* NewItemRowView.swift */,
 				3EED737A2C2E0AEA00B55F2F /* Extension.isShown.swift */,
 				3EED737E2C2E23A900B55F2F /* TodoProduction.swift */,
+				3EED73802C2E590D00B55F2F /* CustomSegmentedControl.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				3EED73732C2DAD3300B55F2F /* CompleteButton.swift in Sources */,
 				3EED72F82C1F2BF000B55F2F /* TodoApp.xcdatamodeld in Sources */,
 				3EED73792C2E057A00B55F2F /* PlusButton.swift in Sources */,
+				3EED73812C2E590D00B55F2F /* CustomSegmentedControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
