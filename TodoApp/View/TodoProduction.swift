@@ -261,6 +261,7 @@ struct TodoProduction: View {
                 Section(){
                     Button(action: {
                         taskManager.removeItemById(id: id ?? "" )
+                        self.presentationMode.wrappedValue.dismiss()
                     },
                            label: {
                         HStack{
@@ -286,7 +287,6 @@ struct TodoProduction: View {
                 ToolbarItem(placement: .topBarLeading){
                     Button("Отменить"){
                         self.presentationMode.wrappedValue.dismiss()
-//                            dismiss()
                     }
                 }
                 
