@@ -41,7 +41,11 @@ struct TodoList: View {
                 plusButton
             }
             .sheet(isPresented: $isMakeNewShown){
-                TodoProduction(toggleOn: false)
+                TodoProduction(toggleOn: false,deadline: Calendar.current.date(
+                    byAdding: .day,
+                    value: 1,
+                    to: Date()
+                ) ?? Date())
                     .environmentObject(taskManager)
             }
             

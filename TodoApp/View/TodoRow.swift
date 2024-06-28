@@ -31,7 +31,7 @@ struct TodoRow: View {
                     Text(itemText)
                         .font(.system(size: 17))
                 }
-                if deadline != nil{
+                if isHasDeadline{
                     HStack{
                         Image(systemName: "calendar")
                         Text(formatter.string(from: deadline ?? Date.now))
