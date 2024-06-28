@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct MainView: View {
+    var taskManager: TaskManager = TaskManager()
     var body: some View {
         NavigationView(){
             ZStack{
-                TodoList()
+                TodoList(taskManager: taskManager)
                     .navigationTitle("Мои дела").navigationBarTitleDisplayMode(.large)
             }
             

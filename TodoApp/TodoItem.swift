@@ -13,7 +13,7 @@ enum Importance: String{
     case unimportant = "unimportant"
 }
 
-struct TodoItem{
+struct TodoItem: Identifiable{
     let id: String
     let text: String
     let importance: Importance

@@ -9,10 +9,25 @@ import SwiftUI
 
 struct TodoList: View {
     @State var isMakeNewShown: Bool = false
+    @StateObject var taskManager: TaskManager
     var body: some View {
             List(){
                 Section(header: HeaderView()){
-                    ForEach(1..<5, content: {_ in TodoRow(isCompleted: false, importance: .regular)})
+                    ForEach(taskManager.todoitems, id: \.id) { item in
+//                        let item = taskManager.todoitems[index]
+//                        Text("\(item)")
+                        TodoRow(
+                            id: item.id,
+                            isCompleted: item.isDone,
+                            importance: item.importance,
+                            itemText: item.text,
+                            isHasDeadline: item.deadline != nil ? true : false,
+                            deadline: item.deadline ?? Date()
+                          
+                        )
+                            .environmentObject(taskManager)
+                           
+                    }
                     NewItemRowView()
                         .onTapGesture(perform:{ _ in 
                             isMakeNewShown.toggle()
@@ -26,7 +41,8 @@ struct TodoList: View {
                 plusButton
             }
             .sheet(isPresented: $isMakeNewShown){
-                TodoProduction()
+                TodoProduction(toggleOn: false)
+                    .environmentObject(taskManager)
             }
             
             
@@ -56,5 +72,5 @@ struct TodoList: View {
 }
 
 #Preview {
-    TodoList()
+    TodoList(taskManager: TaskManager())
 }

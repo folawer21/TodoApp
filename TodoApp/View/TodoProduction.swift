@@ -9,8 +9,10 @@ import SwiftUI
 
 struct TodoProduction: View {
 //    @State var isReadyToSave: Bool
+    @EnvironmentObject var taskManager: TaskManager
+    @State var id: String?
     @State var text: String = ""
-    @State var toggleOn: Bool = false
+    @State var toggleOn: Bool
     @State var deadline: Date = Calendar.current.date(
         byAdding: .day,
         value: 1,
@@ -23,6 +25,8 @@ struct TodoProduction: View {
     @State var selectedColor: Color = .blue
     @State var selectedImportance: Importance = .regular
     
+    @Environment(\.presentationMode) var presentationMode
+
     var formatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "d MMMM YYYY"
@@ -129,13 +133,25 @@ struct TodoProduction: View {
             .toolbar{
                 ToolbarItem(placement: .topBarLeading){
                     Button("Отменить"){
+                        self.presentationMode.wrappedValue.dismiss()
 //                            dismiss()
                     }
                 }
                 
                 ToolbarItem(placement: .topBarTrailing){
                     Button("Сохранить"){
-                        
+                        let item = TodoItem(
+                            id: id ?? UUID().uuidString,
+                            text: text,
+                            importance: selectedImportance,
+                            deadline: deadline,
+                            isDone: false,
+                            createdAt: Date(),
+                            changedAt: nil
+                        )
+                        taskManager.addNewItem(item: item)
+                        self.presentationMode.wrappedValue.dismiss()
+
                     }
                     .disabled(text == "")
                 }
@@ -147,7 +163,7 @@ struct TodoProduction: View {
         
 }
 
-#Preview {
-    TodoProduction(/*isReadyToSave: false*/ selectedImportance: Importance.important)
-}
-
+//#Preview {
+//    TodoProduction(/*isReadyToSave: false*/ selectedImportance: Importance.important, task)
+//}
+//

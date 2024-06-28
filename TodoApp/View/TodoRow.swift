@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct TodoRow: View {
+    var id: String
     @State var isCompleted: Bool
-    @State var importance: Importance = .regular
-    @State var itemText: String = "Купить сыр!"
+    @State var importance: Importance
+    @State var itemText: String
     @State var isScreenShown: Bool = false
-    @State var deadline: Date? = Date()
+    @State var isHasDeadline: Bool 
+    @State var deadline: Date?
     
+    @EnvironmentObject var taskManager: TaskManager
     var body: some View {
         HStack{
             CompleteButton(isCompleted: $isCompleted, importance: $importance)
@@ -46,10 +49,17 @@ struct TodoRow: View {
         }
         .sheet(isPresented: $isScreenShown){
             TodoProduction(
+                id: id,
                 text: itemText,
-                deadline: deadline ??  Date(),
+                toggleOn: isHasDeadline,
+                deadline: deadline ?? (Calendar.current.date(
+                            byAdding: .day,
+                            value: 1,
+                            to: Date()
+                        ) ?? Date()) ,
                 selectedImportance: importance
-            )
+                )
+            .environmentObject(taskManager)
         }
         .swipeActions(edge: .leading){
             completeButton
@@ -80,7 +90,9 @@ struct TodoRow: View {
         
     var deleteButton: some View {
          Button(
-             action: {},
+             action: {
+                 taskManager.removeItemById(id: id)
+             },
              label: {
                  Image(systemName: "trash.fill")
              }
@@ -115,6 +127,6 @@ struct TodoRow: View {
     }
 }
 
-#Preview {
-    TodoRow(isCompleted: false, importance: .regular)
-}
+//#Preview {
+//    TodoRow(isCompleted: false, importance: .regular)
+//}
