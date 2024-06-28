@@ -26,6 +26,8 @@
 		3EED737D2C2E1AEF00B55F2F /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EED737C2C2E1AEF00B55F2F /* TestView.swift */; };
 		3EED737F2C2E23A900B55F2F /* TodoProduction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EED737E2C2E23A900B55F2F /* TodoProduction.swift */; };
 		3EED73812C2E590D00B55F2F /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EED73802C2E590D00B55F2F /* CustomSegmentedControl.swift */; };
+		3EED73832C2F41C400B55F2F /* CustomColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EED73822C2F41C400B55F2F /* CustomColorPickerView.swift */; };
+		3EED73852C2F458D00B55F2F /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EED73842C2F458D00B55F2F /* ColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		3EED737C2C2E1AEF00B55F2F /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		3EED737E2C2E23A900B55F2F /* TodoProduction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoProduction.swift; sourceTree = "<group>"; };
 		3EED73802C2E590D00B55F2F /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
+		3EED73822C2F41C400B55F2F /* CustomColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorPickerView.swift; sourceTree = "<group>"; };
+		3EED73842C2F458D00B55F2F /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,7 @@
 				3EED73192C21F7F300B55F2F /* TodoItem.swift */,
 				3EED73782C2E057A00B55F2F /* PlusButton.swift */,
 				3EED737C2C2E1AEF00B55F2F /* TestView.swift */,
+				3EED73842C2F458D00B55F2F /* ColorExtension.swift */,
 			);
 			path = TodoApp;
 			sourceTree = "<group>";
@@ -110,6 +115,7 @@
 				3EED737A2C2E0AEA00B55F2F /* Extension.isShown.swift */,
 				3EED737E2C2E23A900B55F2F /* TodoProduction.swift */,
 				3EED73802C2E590D00B55F2F /* CustomSegmentedControl.swift */,
+				3EED73822C2F41C400B55F2F /* CustomColorPickerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -188,6 +194,7 @@
 				3EED737D2C2E1AEF00B55F2F /* TestView.swift in Sources */,
 				3EED73692C2CC18A00B55F2F /* TodoListView.swift in Sources */,
 				3EED736D2C2CD63200B55F2F /* HeaderView.swift in Sources */,
+				3EED73852C2F458D00B55F2F /* ColorExtension.swift in Sources */,
 				3EED737F2C2E23A900B55F2F /* TodoProduction.swift in Sources */,
 				3EED737B2C2E0AEA00B55F2F /* Extension.isShown.swift in Sources */,
 				3EED736F2C2CDFED00B55F2F /* TodoRow.swift in Sources */,
@@ -195,6 +202,7 @@
 				3EED73752C2DF4E600B55F2F /* NewItemRowView.swift in Sources */,
 				3EED731A2C21F7F300B55F2F /* TodoItem.swift in Sources */,
 				3EED72F22C1F2BF000B55F2F /* ViewController.swift in Sources */,
+				3EED73832C2F41C400B55F2F /* CustomColorPickerView.swift in Sources */,
 				3EED72F02C1F2BF000B55F2F /* SceneDelegate.swift in Sources */,
 				3EED731F2C26116800B55F2F /* FileCache.swift in Sources */,
 				3EED73732C2DAD3300B55F2F /* CompleteButton.swift in Sources */,

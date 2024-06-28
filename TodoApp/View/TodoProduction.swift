@@ -17,6 +17,10 @@ struct TodoProduction: View {
         to: Date()
     ) ?? Date()
     @State var calendarIsShown: Bool = false
+    @State var colorPickerIsShown: Bool = false
+    
+    @State var selectedBrightness: Double = 1.0
+    @State var selectedColor: Color = .blue
     @State var selectedImportance: Importance = .regular
     
     var formatter = {
@@ -34,21 +38,43 @@ struct TodoProduction: View {
                         .lineLimit(4...)
                 }
                 Section{
-                    VStack(alignment: .leading){
+                    Group(/*alignment: .leading*/){
                         HStack{
                             Text("Важность")
                             Spacer()
                             CustomSegmentedControl(selectedImportance: $selectedImportance)
-//                                .frame(width: 156 , height: 36)
                         }
-                        .frame(height: 56)
-                        Divider()
+//                        .frame(height: 56)
+//                        Divider()
+                        HStack{
+                            Text("Цвет")
+                            Spacer()
+                            Button(action: {
+                                withAnimation{
+                                    colorPickerIsShown.toggle()
+                                }
+                            }, label: {
+                                Circle()
+                                    .frame(width: 25, height: 25)
+                                    .foregroundColor(selectedColor)
+                                    .brightness(1 - selectedBrightness)
+                            })
+                        }
+                       
+                       
+                        if colorPickerIsShown{
+                            CustomColorPickerView(selectedColor: $selectedColor, brightness: $selectedBrightness)
+                        }
+                       
+                        
                         HStack{
                             VStack(alignment: .leading) {
                                 Text("Сделать до")
                                 if toggleOn {
                                     Button(action: {
-                                        calendarIsShown.toggle()
+                                        withAnimation{
+                                            calendarIsShown.toggle()
+                                        }
                                     },
                                     label: {
                                         Text(formatter.string(from: deadline))
@@ -63,12 +89,15 @@ struct TodoProduction: View {
                             Toggle("",isOn: $toggleOn)
                             
                         }
+//                        .frame(height: 56)
                         if calendarIsShown && toggleOn{
-                            Divider()
+//                            Divider()
                             DatePicker("", selection: $deadline,displayedComponents: .date)
                                 .datePickerStyle(.graphical)
                                 .environment(\.locale, Locale(identifier: "ru_RU"))
-                                .animation(.bouncy)
+                                .animation(.snappy)
+                                .transition(.opacity)
+                             
                         }
                     }
                 }
@@ -112,6 +141,7 @@ struct TodoProduction: View {
                 }
             }
         }
+       
 
     }
         
