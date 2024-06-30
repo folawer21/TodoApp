@@ -52,6 +52,7 @@ struct TodoRow: View {
             })
             .foregroundColor(.secondary)
         }
+        .strikethrough(isCompleted, pattern: .solid, color: .secondary)
         .sheet(isPresented: $isScreenShown){
             TodoProduction(
                 id: id,

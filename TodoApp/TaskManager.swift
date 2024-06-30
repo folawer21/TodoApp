@@ -27,10 +27,7 @@ final class TaskManager: ObservableObject{
     
     func addNewItem(item: TodoItem){
         if let index = checkIfAlreadyHere(id: item.id){
-            print("Changing")
-            print(todoitems[index])
             todoitems[index] = item
-            print(todoitems[index])
         }
         else{
             todoitems.append(item)
