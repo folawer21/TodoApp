@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E33C78B2C34A2EA0087F2D8 /* TodoCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E33C78A2C34A2EA0087F2D8 /* TodoCalendarView.swift */; };
+		3E33C78D2C34B7140087F2D8 /* TodoCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E33C78C2C34B7140087F2D8 /* TodoCalendarCell.swift */; };
+		3E33C78F2C34B7750087F2D8 /* CalendarCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E33C78E2C34B7750087F2D8 /* CalendarCollectionCell.swift */; };
 		3EED72F02C1F2BF000B55F2F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EED72EF2C1F2BF000B55F2F /* SceneDelegate.swift */; };
 		3EED72F22C1F2BF000B55F2F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EED72F12C1F2BF000B55F2F /* ViewController.swift */; };
 		3EED72F52C1F2BF000B55F2F /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 3EED72F42C1F2BF000B55F2F /* Base */; };
@@ -32,6 +35,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E33C78A2C34A2EA0087F2D8 /* TodoCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCalendarView.swift; sourceTree = "<group>"; };
+		3E33C78C2C34B7140087F2D8 /* TodoCalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCalendarCell.swift; sourceTree = "<group>"; };
+		3E33C78E2C34B7750087F2D8 /* CalendarCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionCell.swift; sourceTree = "<group>"; };
 		3EED72EA2C1F2BF000B55F2F /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EED72EF2C1F2BF000B55F2F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3EED72F12C1F2BF000B55F2F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +75,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E33C7852C34A0F80087F2D8 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3EED736C2C2CD63200B55F2F /* HeaderView.swift */,
+				3EED73802C2E590D00B55F2F /* CustomSegmentedControl.swift */,
+				3EED73822C2F41C400B55F2F /* CustomColorPickerView.swift */,
+				3EED73722C2DAD3300B55F2F /* CompleteButton.swift */,
+				3EED73782C2E057A00B55F2F /* PlusButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		3E33C7862C34A1B70087F2D8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3EED737A2C2E0AEA00B55F2F /* Extension.isShown.swift */,
+				3EED73842C2F458D00B55F2F /* ColorExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3E33C7872C34A1D50087F2D8 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				3EED736A2C2CD28400B55F2F /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		3E33C7882C34A27D0087F2D8 /* TodoListViews */ = {
+			isa = PBXGroup;
+			children = (
+				3EED736E2C2CDFED00B55F2F /* TodoRow.swift */,
+				3EED737E2C2E23A900B55F2F /* TodoProduction.swift */,
+				3EED73742C2DF4E600B55F2F /* NewItemRowView.swift */,
+				3EED73682C2CC18A00B55F2F /* TodoListView.swift */,
+			);
+			path = TodoListViews;
+			sourceTree = "<group>";
+		};
+		3E33C7892C34A29F0087F2D8 /* TodoCalendarViews */ = {
+			isa = PBXGroup;
+			children = (
+				3E33C78A2C34A2EA0087F2D8 /* TodoCalendarView.swift */,
+				3E33C78C2C34B7140087F2D8 /* TodoCalendarCell.swift */,
+				3E33C78E2C34B7750087F2D8 /* CalendarCollectionCell.swift */,
+			);
+			path = TodoCalendarViews;
+			sourceTree = "<group>";
+		};
 		3EED72E12C1F2BF000B55F2F = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +144,7 @@
 		3EED72EC2C1F2BF000B55F2F /* TodoApp */ = {
 			isa = PBXGroup;
 			children = (
+				3E33C7862C34A1B70087F2D8 /* Extensions */,
 				3EED73672C2CC16F00B55F2F /* View */,
 				3EED731E2C26116800B55F2F /* FileCache.swift */,
 				3EED72EF2C1F2BF000B55F2F /* SceneDelegate.swift */,
@@ -99,7 +156,6 @@
 				3EED72F62C1F2BF000B55F2F /* TodoApp.xcdatamodeld */,
 				3EED73192C21F7F300B55F2F /* TodoItem.swift */,
 				3EED737C2C2E1AEF00B55F2F /* TestView.swift */,
-				3EED73842C2F458D00B55F2F /* ColorExtension.swift */,
 				3EED73862C2F4B2500B55F2F /* TaskManager.swift */,
 			);
 			path = TodoApp;
@@ -108,17 +164,10 @@
 		3EED73672C2CC16F00B55F2F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3EED73782C2E057A00B55F2F /* PlusButton.swift */,
-				3EED73682C2CC18A00B55F2F /* TodoListView.swift */,
-				3EED736A2C2CD28400B55F2F /* MainView.swift */,
-				3EED736C2C2CD63200B55F2F /* HeaderView.swift */,
-				3EED736E2C2CDFED00B55F2F /* TodoRow.swift */,
-				3EED73722C2DAD3300B55F2F /* CompleteButton.swift */,
-				3EED73742C2DF4E600B55F2F /* NewItemRowView.swift */,
-				3EED737A2C2E0AEA00B55F2F /* Extension.isShown.swift */,
-				3EED737E2C2E23A900B55F2F /* TodoProduction.swift */,
-				3EED73802C2E590D00B55F2F /* CustomSegmentedControl.swift */,
-				3EED73822C2F41C400B55F2F /* CustomColorPickerView.swift */,
+				3E33C7892C34A29F0087F2D8 /* TodoCalendarViews */,
+				3E33C7882C34A27D0087F2D8 /* TodoListViews */,
+				3E33C7872C34A1D50087F2D8 /* Main */,
+				3E33C7852C34A0F80087F2D8 /* Components */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -202,6 +251,7 @@
 				3EED737B2C2E0AEA00B55F2F /* Extension.isShown.swift in Sources */,
 				3EED736F2C2CDFED00B55F2F /* TodoRow.swift in Sources */,
 				3EED736B2C2CD28400B55F2F /* MainView.swift in Sources */,
+				3E33C78B2C34A2EA0087F2D8 /* TodoCalendarView.swift in Sources */,
 				3EED73752C2DF4E600B55F2F /* NewItemRowView.swift in Sources */,
 				3EED731A2C21F7F300B55F2F /* TodoItem.swift in Sources */,
 				3EED72F22C1F2BF000B55F2F /* ViewController.swift in Sources */,
@@ -210,7 +260,9 @@
 				3EED72F02C1F2BF000B55F2F /* SceneDelegate.swift in Sources */,
 				3EED731F2C26116800B55F2F /* FileCache.swift in Sources */,
 				3EED73732C2DAD3300B55F2F /* CompleteButton.swift in Sources */,
+				3E33C78D2C34B7140087F2D8 /* TodoCalendarCell.swift in Sources */,
 				3EED72F82C1F2BF000B55F2F /* TodoApp.xcdatamodeld in Sources */,
+				3E33C78F2C34B7750087F2D8 /* CalendarCollectionCell.swift in Sources */,
 				3EED73792C2E057A00B55F2F /* PlusButton.swift in Sources */,
 				3EED73812C2E590D00B55F2F /* CustomSegmentedControl.swift in Sources */,
 			);

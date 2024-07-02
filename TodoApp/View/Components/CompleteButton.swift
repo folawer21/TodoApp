@@ -22,8 +22,6 @@ struct CompleteButton: View {
                    .imageScale(.small)
                    .foregroundColor(foregroundColor)
            }
-                   
-             
     }
     
     var backgroundColor: Color  {

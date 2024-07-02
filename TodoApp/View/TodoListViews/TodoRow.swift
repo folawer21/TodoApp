@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 struct TodoRow: View {
     var id: String
     @State var isCompleted: Bool
@@ -16,7 +15,6 @@ struct TodoRow: View {
     @State var isScreenShown: Bool = false
     var isHasDeadline: Bool 
     var deadline: Date?
-    
     @EnvironmentObject var taskManager: TaskManager
     var body: some View {
         HStack{
