@@ -29,8 +29,14 @@ struct TodoRow: View {
                             .foregroundColor(.red)
                             .fontWeight(.bold)
                     }
+                    if importance == .unimportant{
+                        Image("downArrow")
+                            .foregroundColor(.secondary)
+                            .fontWeight(.bold)
+                    }
                     Text(itemText)
                         .font(.system(size: 17))
+                        .lineLimit(3)
                 }
                 if isHasDeadline{
                     HStack{
