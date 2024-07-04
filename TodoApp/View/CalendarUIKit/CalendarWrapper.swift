@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct CalendarWrapper: UIViewControllerRepresentable {
-    @Environment(\.presentationMode) var presentationMode
+    @ObservedObject var taskManager: TaskManager
     
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
     }
     
     func makeUIViewController(context: Context) -> some UIViewController {
         let view = CalendarView()
+        view.taskManager = self.taskManager
         return view
     }
     
@@ -22,5 +23,5 @@ struct CalendarWrapper: UIViewControllerRepresentable {
 }
 
 #Preview {
-    CalendarWrapper()
+    CalendarWrapper(taskManager: TaskManager())
 }

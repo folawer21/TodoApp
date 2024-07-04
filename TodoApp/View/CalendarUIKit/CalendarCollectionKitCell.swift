@@ -15,6 +15,7 @@ final class CalendarCollectionKitCell: UICollectionViewCell{
           let label = UILabel()
           label.translatesAutoresizingMaskIntoConstraints = false
           label.textAlignment = .center
+          label.numberOfLines = 0
           return label
       }()
       

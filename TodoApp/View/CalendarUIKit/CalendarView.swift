@@ -2,6 +2,7 @@ import UIKit
 import SwiftUI
 
 final class CalendarView: UIViewController{
+    var taskManager: TaskManager?
     private let tableView: UITableView = UITableView()
     private let containerView = UIView()
     private let bottomBorder = UIView()
@@ -20,7 +21,7 @@ final class CalendarView: UIViewController{
 //                                                    "25.11": [ TodoItem(text: "11111", color: .gray, importance: .important, deadline: nil, isDone: false, createdAt: Date(), changedAt: nil),
 //                                                    TodoItem(text: "11111", color: .gray, importance: .important, deadline: nil, isDone: false, createdAt: Date(), changedAt: nil)]]
     private var itemsArray: [String: [String]] = [:]
-    private var dates: [String] = ["22.09","24.10","24.11","25.11","11","22","33","44","55","66","77","88","99",]
+    private var dates: [String] = []
     
     private let collectionCellIdentifier = CalendarCollectionKitCell.reuseIdentifier
     private let tableCellIdentifier = CalendarTableKitCell.reuseIdentifier
@@ -65,12 +66,12 @@ final class CalendarView: UIViewController{
         tableView.register(CalendarTableKitCell.self, forCellReuseIdentifier: tableCellIdentifier)
         tableView.register(HeaderViewKit.self, forHeaderFooterViewReuseIdentifier: HeaderViewKit.reuseIdentifier)
         collectionView.register(CalendarCollectionKitCell.self, forCellWithReuseIdentifier: collectionCellIdentifier)
-        
-        for date in dates{
-            itemsArray[date] = ["Запись 1 для \(date)", "Запись 2 для \(date)", "Запись 3 для \(date)"]
-        }
-        
-
+        guard let datesArr = taskManager?.getDatesCollection(),
+              let items = taskManager?.getCollectionByDate() else {return }
+        dates = datesArr
+        itemsArray = items
+        print("result:", dates)
+    
     }
     
     private func addSubViews(){
@@ -157,8 +158,14 @@ extension CalendarView: UITableViewDataSource{
         cell.layer.masksToBounds = true
         cell.contentView.layer.masksToBounds = true
         if indexPath.row == 0 {
-            cell.contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-            cell.contentView.layer.cornerRadius = 15
+            if items.count == 1 {
+                cell.contentView.layer.cornerRadius = 15
+
+            }else{
+                cell.contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+                cell.contentView.layer.cornerRadius = 15
+            }
+            
         }else if indexPath.row == (items.count - 1) {
             cell.contentView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
             cell.contentView.layer.cornerRadius = 15
@@ -226,9 +233,6 @@ extension CalendarView: UITableViewDataSource{
         guard let item = tableView.cellForRow(at: indexPath) as? CalendarTableKitCell else {return}
         item.unCompleteTask()
     }
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-//    }
 }
 
 
@@ -241,7 +245,7 @@ extension CalendarView: UITableViewDelegate{
 extension CalendarView: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionCellIdentifier, for: indexPath) as? CalendarCollectionKitCell else {return UICollectionViewCell()}
-        let text = dates[indexPath.row]
+        var text = dates[indexPath.row]
         if indexPath.row == 0 && indexPath.section == 0{
             cell.layer.cornerRadius = 15
             cell.layer.borderColor = Colors.darkGrey.cgColor
@@ -249,6 +253,7 @@ extension CalendarView: UICollectionViewDataSource{
             cell.backgroundColor = Colors.lightGrey
             cell.isSelected = true
         }
+        text.replace(" ", with: "\n")
         cell.dateLabel.text = text
         return cell
     }
