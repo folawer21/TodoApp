@@ -27,7 +27,6 @@ struct CustomColorPickerView: View{
                     .fontWeight(.bold)
                 
                 Slider(value: $brightness, in: 0.0...1.0, step: 0.1)
-                
             }
             .padding()
             

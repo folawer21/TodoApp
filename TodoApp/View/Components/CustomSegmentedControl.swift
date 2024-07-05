@@ -12,7 +12,7 @@ struct CustomSegmentedControl: View {
     
     var body: some View {
         HStack(spacing: 0) {
-            Button(action: { /*selectedImportance = .unimportant*/ }) {
+            Button(action: {  }) {
                 Image(systemName: "arrow.down")
                     .imageScale(.medium)
                     .fontWeight(.bold)
@@ -29,7 +29,7 @@ struct CustomSegmentedControl: View {
             
             Divider().frame(height: 31.5)
             
-            Button(action: { /*selectedImportance = .regular */}) {
+            Button(action: { }) {
                 Text("Нет")
                     .font(.system(size: 15))
                     .foregroundColor(.black)
@@ -46,7 +46,7 @@ struct CustomSegmentedControl: View {
 
             Divider().frame(height: 31.5)
             
-            Button(action: { /*selectedImportance = .important */}) {
+            Button(action: { }) {
                 Image(systemName: "exclamationmark.2")
                     .imageScale(.medium)
                     .fontWeight(.bold)

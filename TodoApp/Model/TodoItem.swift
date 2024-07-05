@@ -22,8 +22,9 @@ struct TodoItem: Identifiable{
     let color: Color
     let createdAt: Date
     let changedAt: Date?
+    let category: Color
     
-    init(id: String = UUID().uuidString , text: String, color: Color,importance: Importance, deadline: Date?, isDone: Bool, createdAt: Date, changedAt: Date?) {
+    init(id: String = UUID().uuidString , text: String, color: Color,importance: Importance, deadline: Date?, isDone: Bool, createdAt: Date, changedAt: Date?,categorty: Color) {
         self.id = id
         self.text = text
         self.color = color
@@ -32,6 +33,7 @@ struct TodoItem: Identifiable{
         self.isDone = isDone
         self.createdAt = createdAt
         self.changedAt = changedAt
+        self.category = categorty
     }
 }
 
@@ -45,11 +47,11 @@ static func parse(json: Any) -> TodoItem?{
         guard let deadline = jsonObject["deadline"] as? Date? else {return nil}
         guard let isDone = jsonObject["isDone"] as? Bool else {return nil}
         guard let color = jsonObject["color"] as? Color else {return nil}
+        guard let category = jsonObject["category"] as? Color else {return nil}
         let createdAt = Date()
         let changedAt: Date? = nil
-    let todoItem = TodoItem(id: id, text: text , color:color, importance: importance, deadline: deadline, isDone: isDone, createdAt: createdAt, changedAt: changedAt)
+    let todoItem = TodoItem(id: id, text: text , color:color, importance: importance, deadline: deadline, isDone: isDone, createdAt: createdAt, changedAt: changedAt, categorty: category)
         return todoItem
-      
     }
     
     var json: Any{
@@ -64,6 +66,7 @@ static func parse(json: Any) -> TodoItem?{
         }
         jsonDict["color"] = color
         jsonDict["isDone"] = self.isDone
+        jsonDict["category"] = category
         return jsonDict
     }
 }

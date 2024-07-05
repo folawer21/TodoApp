@@ -7,19 +7,23 @@
 
 import SwiftUI
 
+protocol TodoProductionDelegate: AnyObject{
+    func screenWasClosen()
+}
+
 struct TodoProduction: View {
-//    @State var isReadyToSave: Bool
-    @EnvironmentObject var taskManager: TaskManager
+    var taskManager: TaskManager
+    weak var delegate: TodoProductionDelegate?
     @State var id: String?
     @State var text: String = ""
     @State var toggleOn: Bool
     @State var deadline: Date
     @State var calendarIsShown: Bool = false
     @State var colorPickerIsShown: Bool = false
-    
     @State var selectedBrightness: Double = 1.0
     @State var selectedColor: Color
     @State var selectedImportance: Importance = .regular
+    @State var selectedCategory: Color
     
     @Environment(\.presentationMode) var presentationMode
 
@@ -38,14 +42,18 @@ struct TodoProduction: View {
                         .lineLimit(4...)
                 }
                 Section{
-                    Group(/*alignment: .leading*/){
+                    Group(){
                         HStack{
                             Text("Важность")
                             Spacer()
                             CustomSegmentedControl(selectedImportance: $selectedImportance)
                         }
-//                        .frame(height: 56)
-//                        Divider()
+                        HStack{
+                            Text("Категория")
+                            Spacer()
+                            CategoryPicker(selectedColor: $selectedCategory)
+                            
+                        }
                         HStack{
                             Text("Цвет")
                             Spacer()
@@ -89,15 +97,12 @@ struct TodoProduction: View {
                             Toggle("",isOn: $toggleOn)
                             
                         }
-//                        .frame(height: 56)
                         if calendarIsShown && toggleOn{
-//                            Divider()
                             DatePicker("", selection: $deadline,displayedComponents: .date)
                                 .datePickerStyle(.graphical)
                                 .environment(\.locale, Locale(identifier: "ru_RU"))
                                 .animation(.snappy)
                                 .transition(.opacity)
-                             
                         }
                     }
                 }
@@ -105,6 +110,7 @@ struct TodoProduction: View {
                 Section(){
                     Button(action: {
                         taskManager.removeItemById(id: id ?? "" )
+                        self.delegate?.screenWasClosen()
                         self.presentationMode.wrappedValue.dismiss()
                     },
                            label: {
@@ -130,7 +136,9 @@ struct TodoProduction: View {
             .toolbar{
                 ToolbarItem(placement: .topBarLeading){
                     Button("Отменить"){
+                        self.delegate?.screenWasClosen()
                         self.presentationMode.wrappedValue.dismiss()
+                        
                     }
                 }
                 
@@ -145,11 +153,12 @@ struct TodoProduction: View {
                             deadline: toggleOn ? deadline : nil,
                             isDone: false,
                             createdAt: Date(),
-                            changedAt: nil
+                            changedAt: nil,
+                            categorty: selectedCategory
                         )
                         taskManager.addNewItem(item: item)
+                        self.delegate?.screenWasClosen()
                         self.presentationMode.wrappedValue.dismiss()
-
                     }
                     .disabled(text == "")
                 }
@@ -160,8 +169,8 @@ struct TodoProduction: View {
     }
         
 }
-
-//#Preview {
-//    TodoProduction(/*isReadyToSave: false*/ selectedImportance: Importance.important, task)
-//}
 //
+//#Preview {
+//    TodoProduction(taskManager: TaskManager(), toggleOn: false, deadline: Date(), selectedColor: .blue,selectedCategory: .red)
+//}
+

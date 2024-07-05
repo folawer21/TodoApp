@@ -6,21 +6,21 @@
 //
 
 import SwiftUI
-
 struct TodoRow: View {
+    @EnvironmentObject var taskManager: TaskManager
     var id: String
-    @State var isCompleted: Bool
+    var isCompleted: Bool
     var importance: Importance
     var itemText: String
     var color: Color
     @State var isScreenShown: Bool = false
     var isHasDeadline: Bool 
     var deadline: Date?
+    var categoty: Color
     
-    @EnvironmentObject var taskManager: TaskManager
     var body: some View {
         HStack{
-            CompleteButton(isCompleted: $isCompleted, importance: importance)
+            CompleteButton(isCompleted: isCompleted, importance: importance)
                 .onTapGesture(perform: completeButtonTapped)
             VStack(alignment: .leading){
                 HStack{
@@ -29,8 +29,14 @@ struct TodoRow: View {
                             .foregroundColor(.red)
                             .fontWeight(.bold)
                     }
+                    if importance == .unimportant{
+                        Image("downArrow")
+                            .foregroundColor(.secondary)
+                            .fontWeight(.bold)
+                    }
                     Text(itemText)
                         .font(.system(size: 17))
+                        .lineLimit(3)
                 }
                 if isHasDeadline{
                     HStack{
@@ -55,6 +61,7 @@ struct TodoRow: View {
         .strikethrough(isCompleted, pattern: .solid, color: .secondary)
         .sheet(isPresented: $isScreenShown){
             TodoProduction(
+                taskManager: taskManager,
                 id: id,
                 text: itemText,
                 toggleOn: isHasDeadline,
@@ -64,9 +71,9 @@ struct TodoRow: View {
                             to: Date()
                         ) ?? Date()) ,
                 selectedColor: color,
-                selectedImportance: importance
+                selectedImportance: importance,
+                selectedCategory: categoty
                 )
-            .environmentObject(taskManager)
         }
         .swipeActions(edge: .leading){
             completeButton
@@ -82,8 +89,8 @@ struct TodoRow: View {
     }
     var completeButton: some View {
         Button(
-            action: {isCompleted.toggle()
-                taskManager.makeComplete(id: id, complete: isCompleted)
+            action: {
+                taskManager.makeComplete(id: id, complete: !isCompleted)
                         },
             label: {
                 Image(systemName: "checkmark.circle")
@@ -128,16 +135,15 @@ struct TodoRow: View {
     }()
     
     func completeButtonTapped(){
-        isCompleted.toggle()
-        taskManager.makeComplete(id: id, complete: isCompleted)
+        taskManager.makeComplete(id: id, complete: !isCompleted)
     }
     
     func showRefactorView(){
-        isCompleted.toggle()
+        
     }
 }
 
 #Preview {
     TodoRow(id:"asddas", isCompleted: false, importance: .important, itemText: "AAAAAAA",
-            color: .blue, isHasDeadline: false)
+            color: .blue, isHasDeadline: false, categoty: .purple)
 }

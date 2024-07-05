@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CompleteButton: View {
-   @Binding var isCompleted: Bool
+   var isCompleted: Bool
    var importance: Importance
    
     var body: some View {
@@ -22,8 +22,6 @@ struct CompleteButton: View {
                    .imageScale(.small)
                    .foregroundColor(foregroundColor)
            }
-                   
-             
     }
     
     var backgroundColor: Color  {
@@ -35,7 +33,14 @@ struct CompleteButton: View {
     }
     
     var borderColor: Color{
-        importance == .important ? .red : .gray.opacity(0.4)
+        if importance == .important && isCompleted == false{
+            return .red
+        }
+        else if importance == .important && isCompleted == true{
+            return .green
+        }else{
+            return .gray.opacity(0.4)
+        }
     }
 }
 
