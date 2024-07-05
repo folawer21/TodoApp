@@ -43,9 +43,6 @@ final class CalendarTableKitCell: UITableViewCell{
         contentView.addSubview(label)
         contentView.addSubview(circleView)
         contentView.backgroundColor = .white
-//        contentView.layer.cornerRadius = 15
-//        circleView.backgroundColor = .black
-
         NSLayoutConstraint.activate([
             
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -56,8 +53,8 @@ final class CalendarTableKitCell: UITableViewCell{
             circleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             circleView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             circleView.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: 8),
-            circleView.widthAnchor.constraint(equalToConstant: 30),
-            circleView.heightAnchor.constraint(equalToConstant: 30)
+            circleView.widthAnchor.constraint(equalToConstant: 25),
+            circleView.heightAnchor.constraint(equalToConstant: 25)
             
         ])
     }

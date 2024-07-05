@@ -12,7 +12,6 @@ protocol TodoProductionDelegate: AnyObject{
 }
 
 struct TodoProduction: View {
-//    @State var isReadyToSave: Bool
     var taskManager: TaskManager
     weak var delegate: TodoProductionDelegate?
     @State var id: String?
@@ -43,7 +42,7 @@ struct TodoProduction: View {
                         .lineLimit(4...)
                 }
                 Section{
-                    Group(/*alignment: .leading*/){
+                    Group(){
                         HStack{
                             Text("Важность")
                             Spacer()
@@ -154,7 +153,8 @@ struct TodoProduction: View {
                             deadline: toggleOn ? deadline : nil,
                             isDone: false,
                             createdAt: Date(),
-                            changedAt: nil
+                            changedAt: nil,
+                            categorty: selectedCategory
                         )
                         taskManager.addNewItem(item: item)
                         self.delegate?.screenWasClosen()

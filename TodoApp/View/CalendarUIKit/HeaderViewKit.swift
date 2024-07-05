@@ -18,20 +18,15 @@ final class HeaderViewKit: UITableViewHeaderFooterView{
         return label
     }()
     
-    
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = Colors.greyForBackground
     }
     
-    
     func setup(text: String){
-       
         addSubview(label)
         label.text = text
-        
         label.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
-//        label.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         label.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12).isActive = true
         }
     

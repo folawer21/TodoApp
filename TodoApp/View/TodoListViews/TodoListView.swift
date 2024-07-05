@@ -21,8 +21,8 @@ struct TodoList: View {
                             itemText: item.text,
                             color: item.color,
                             isHasDeadline: item.deadline != nil ? true : false,
-                            deadline: item.deadline ?? Date()
-                          
+                            deadline: item.deadline ?? Date(),
+                            categoty: item.category
                         )
                             .environmentObject(taskManager)
                            

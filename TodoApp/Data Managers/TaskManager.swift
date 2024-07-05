@@ -76,10 +76,10 @@ final class TaskManager: ObservableObject{
             deadline: old.deadline,
             isDone: complete,
             createdAt: old.createdAt,
-            changedAt: Date()
+            changedAt: Date(),
+            categorty: old.category
         )
         todoitems[index] = new
-        print(new)
     }
     
     func getCollectionByDate() -> [String: [TodoItem]]{
@@ -97,65 +97,38 @@ final class TaskManager: ObservableObject{
         for todoitem in todoitems {
             guard let date = todoitem.deadline else {
                 if result.keys.contains("Другое"){
-                    let text = todoitem.text
                     result["Другое"]?.append(todoitem)
                 }else{
-                    let text = todoitem.text
                     result["Другое"] = [todoitem]
                 }
                 continue
             }
             let stringDate = outputFormatter.string(from: date)
             if result.keys.contains(stringDate){
-//                let text = todoitem.text
-//                result[stringDate]?.append(text)
                 result[stringDate]?.append(todoitem)
             }else{
-//                let text = todoitem.text
-//                result[stringDate] = [text]
                 result[stringDate] = [todoitem]
             }
         }
-        print("arrayByDates: ",result)
         return result
     }
     
     private func getStringDates() -> [String]{
         var result: [String]  = []
+        var flag = false
         for todoitem in todoitems {
             guard let date = todoitem.deadline else {
-                result.append("Другое")
+                    flag = true
                 continue}
             let string = outputFormatter.string(from: date)
             if !result.contains(string){
                 result.append(string)
             }
         }
-        
-        
-//        var result: [String] = []
-//        let dates = getDates()
-//        for date in dates{
-//            let string = outputFormatter.string(from: date)
-//            if !result.contains(string){
-//                result.append(string)
-//            }
-//        }
-//        result.append("Другое")
-        print("strings: ",result)
+        if flag{
+            result.append("Другое")
+        }
         return result
     }
-    
-//    private func getDates() -> [Date]{
-//        var dates : [Date] = []
-//        
-//        for todoitem in todoitems {
-//            guard let date = todoitem.deadline else {continue}
-//            if !dates.contains(date){
-//                dates.append(date)
-//            }
-//        }
-//        print("dates: ",dates)
-//        return dates.sorted()
-//    }
+
 }

@@ -16,13 +16,7 @@ struct NewItemRowView: View {
                 .foregroundStyle(Color.gray)
                 .padding(.leading,32)
         })
-        
-
-      
-        
     }
-    
-    
 }
 
 #Preview {

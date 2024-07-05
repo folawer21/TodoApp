@@ -16,6 +16,7 @@ struct TodoRow: View {
     @State var isScreenShown: Bool = false
     var isHasDeadline: Bool 
     var deadline: Date?
+    var categoty: Color
     
     var body: some View {
         HStack{
@@ -71,7 +72,7 @@ struct TodoRow: View {
                         ) ?? Date()) ,
                 selectedColor: color,
                 selectedImportance: importance,
-                selectedCategory: .red
+                selectedCategory: categoty
                 )
         }
         .swipeActions(edge: .leading){
@@ -88,7 +89,7 @@ struct TodoRow: View {
     }
     var completeButton: some View {
         Button(
-            action: {/*isCompleted.toggle()*/
+            action: {
                 taskManager.makeComplete(id: id, complete: !isCompleted)
                         },
             label: {
@@ -134,7 +135,6 @@ struct TodoRow: View {
     }()
     
     func completeButtonTapped(){
-//        isCompleted.toggle()
         taskManager.makeComplete(id: id, complete: !isCompleted)
     }
     
@@ -145,5 +145,5 @@ struct TodoRow: View {
 
 #Preview {
     TodoRow(id:"asddas", isCompleted: false, importance: .important, itemText: "AAAAAAA",
-            color: .blue, isHasDeadline: false)
+            color: .blue, isHasDeadline: false, categoty: .purple)
 }

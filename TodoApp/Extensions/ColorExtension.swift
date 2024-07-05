@@ -12,7 +12,7 @@ import SwiftUI
 extension Color {
     func hexString() -> String {
         guard let components = UIColor(self).cgColor.components else {
-            return "FFFFFF" // Возвращаем белый цвет в формате HEX, если не удается получить компоненты цвета
+            return "FFFFFF"
         }
         
         let red = components[0]

@@ -8,11 +8,11 @@ final class CalendarView: UIViewController{
     private let bottomBorder = UIView()
     private let topBorder = UIView()
     private let containerCollectionView = UIView()
-//    private let buttonHost = UIHostingController(rootView: PlusButton())
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.allowsMultipleSelection = false
         return collectionView
     }()
     
@@ -26,37 +26,20 @@ final class CalendarView: UIViewController{
         plusButton.layer.shadowOpacity = 0.4
         return plusButton
       }()
-//    private let plusButton = PlusButton()
-//    private var itemsArray: [String: [TodoItem]] = ["22.09":[TodoItem(text: "aaa", color: .gray, importance: .important, deadline: nil, isDone: false, createdAt: Date(), changedAt: nil),TodoItem(text: "BBB", color: .gray, importance: .important, deadline: nil, isDone: false, createdAt: Date(), changedAt: nil),
-//                                                             TodoItem(text: "cccc", color: .gray, importance: .important, deadline: nil, isDone: false, createdAt: Date(), changedAt: nil)],
-//                                                    "25.11": [ TodoItem(text: "11111", color: .gray, importance: .important, deadline: nil, isDone: false, createdAt: Date(), changedAt: nil),
-//                                                    TodoItem(text: "11111", color: .gray, importance: .important, deadline: nil, isDone: false, createdAt: Date(), changedAt: nil)]]
     private var itemsArray: [String: [TodoItem]] = [:]
     private var dates: [String] = []
     
     private let collectionCellIdentifier = CalendarCollectionKitCell.reuseIdentifier
     private let tableCellIdentifier = CalendarTableKitCell.reuseIdentifier
-    
-    override func viewWillAppear(_ animated: Bool) {
-    }
-    
-    override func viewIsAppearing(_ animated: Bool) {
-        print("isapperiang")
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("didAppear")
-    }
-    
+        
 
     private func loadData(){
         guard let datesArr = taskManager?.getDatesCollection(),
               let items = taskManager?.getCollectionByDate() else {return }
         dates = datesArr
         itemsArray = items
-        print("result:", dates,itemsArray)
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -64,7 +47,6 @@ final class CalendarView: UIViewController{
         containerCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         containerView.backgroundColor = Colors.greyForBackground
-//        containerView.backgroundColor = .red
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         
@@ -89,7 +71,6 @@ final class CalendarView: UIViewController{
         
         bottomBorder.backgroundColor = .gray
         topBorder.backgroundColor = .gray
-//        buttonHost.view.backgroundColor = .clear
                 
         addSubViews()
         removeAutoresizeMask()
@@ -99,13 +80,10 @@ final class CalendarView: UIViewController{
         tableView.register(HeaderViewKit.self, forHeaderFooterViewReuseIdentifier: HeaderViewKit.reuseIdentifier)
         collectionView.register(CalendarCollectionKitCell.self, forCellWithReuseIdentifier: collectionCellIdentifier)
         loadData()
-//        print("result:", dates)
     
     }
     
     private func addSubViews(){
-//        view.addSubview(collectionView)
-//        view.addSubview(tableView)
         view.addSubview(containerView)
         view.addSubview(containerCollectionView)
         containerView.addSubview(tableView)
@@ -115,27 +93,15 @@ final class CalendarView: UIViewController{
         
         containerCollectionView.addSubview(topBorder)
         containerCollectionView.addSubview(bottomBorder)
-        
-        
-//        buttonHost.willMove(toParent: self)
-//        addChild(buttonHost)
-//        containerView.addSubview(buttonHost.view)
-//        buttonHost.didMove(toParent: self)
-//        view.addSubview(plusButton)
     }
     
     private func removeAutoresizeMask(){
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
-//        buttonHost.view.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func applyConstraints(){
         NSLayoutConstraint.activate([
-//            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-//            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-//            collectionView.heightAnchor.constraint(equalToConstant: 50),
             containerCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             containerCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             containerCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
@@ -156,10 +122,6 @@ final class CalendarView: UIViewController{
             bottomBorder.trailingAnchor.constraint(equalTo: containerCollectionView.trailingAnchor),
             bottomBorder.heightAnchor.constraint(equalToConstant: 0.5),
             
-//            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-//            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-//            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-//            tableView.topAnchor.constraint(equalTo: collectionView.bottomAnchor)
             containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -172,9 +134,7 @@ final class CalendarView: UIViewController{
             
             
             plusButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            plusButton.bottomAnchor.constraint(equalTo: containerView.layoutMarginsGuide.bottomAnchor, constant: -20),
-//            plusButton.heightAnchor.constraint(equalToConstant: 30)
-            
+            plusButton.bottomAnchor.constraint(equalTo: containerView.layoutMarginsGuide.bottomAnchor, constant: -20)
         ])
     }
     
@@ -190,8 +150,6 @@ final class CalendarView: UIViewController{
         )
         let hostingController = UIHostingController(rootView: todoProd)
         self.present(hostingController,animated: true)
-       
-//        show(hostingController, sender: self)
         }
 }
 
@@ -208,7 +166,7 @@ extension CalendarView: UITableViewDataSource{
         cell.layer.masksToBounds = true
         cell.contentView.layer.masksToBounds = true
         
-        cell.circleView.backgroundColor = .blue
+        cell.circleView.backgroundColor = UIColor(item.category)
         
         
         if indexPath.row == 0 {
@@ -241,11 +199,7 @@ extension CalendarView: UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         dates.count
     }
-    
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        dates[section]
-//    }
-//    
+        
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let date = dates[section]
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HeaderViewKit.reuseIdentifier) as? HeaderViewKit else{
