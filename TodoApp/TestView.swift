@@ -75,33 +75,36 @@ import SwiftUI
 //    }
 //}
 
-struct TestView: View {
-    @State private var selectedColor = 0
-    let colors = [Color.red, Color.green, Color.blue,Color.clear]
-    let colorNames = ["Работа", "Хобби", "Учеба","Другое"]
-    
-    var body: some View {
-        VStack {
-            Picker(selection: $selectedColor, label: Text("Выберите цвет")) {
-                ForEach(0..<colors.count) { index in
-                    HStack {
-                        Circle()
-                            .fill(self.colors[index])
-                            .frame(width: 20, height: 20)
-                        Text(self.colorNames[index])
-                            .frame(width: 80)
-                    }.tag(index)
-                }
-            }
-            .pickerStyle(WheelPickerStyle()) // Используем другой стиль Picker
-            .padding()
-
-        }
-    }
-}
-
-struct TestView_Previews: PreviewProvider {
-    static var previews: some View {
-        TestView()
-    }
-}
+//struct TestView: View {
+//    @State private var selectedColor: Color = 0
+//    let colors = [Color.red, Color.green, Color.blue,Color.clear]
+//    let colorNames = ["Работа", "Хобби", "Учеба","Другое"]
+//    
+//    var body: some View {
+////        VStack {
+////            Picker(selection: $selectedColor, label: Text("Выберите цвет")) {
+////                ForEach(0..<colors.count) { index in
+////                    HStack {
+////                        Circle()
+////                            .fill(self.colors[index])
+////                            .frame(width: 20, height: 20)
+////                        Text(self.colorNames[index])
+////                            .frame(width: 80)
+////                    }.tag(index)
+////                }
+////            }
+////            .pickerStyle(WheelPickerStyle()) // Используем другой стиль Picker
+////            .padding()
+////
+////        }
+//        
+//        
+//        
+//    }
+//}
+//
+//struct TestView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TestView()
+//    }
+//}

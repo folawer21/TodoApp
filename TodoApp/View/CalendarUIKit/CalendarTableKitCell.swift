@@ -14,17 +14,20 @@ final class CalendarTableKitCell: UITableViewCell{
     let label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-
+        label.numberOfLines = 3
         return label
         
         }()
+    
+    let circleView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 15
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
         
     func completeTask(){
         label.textColor = .gray
-//        let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: label.text ?? "")
-//        attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSRange(location: 0, length: attributeString.length))
-//        print(label.attributedText)
-//        label.attributedText = attributeString
         label.strikeThrough(true)
         
     }
@@ -38,15 +41,24 @@ final class CalendarTableKitCell: UITableViewCell{
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(label)
+        contentView.addSubview(circleView)
         contentView.backgroundColor = .white
 //        contentView.layer.cornerRadius = 15
+//        circleView.backgroundColor = .black
 
         NSLayoutConstraint.activate([
             
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            label.trailingAnchor.constraint(equalTo: circleView.leadingAnchor, constant: -8),
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            
+            circleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            circleView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            circleView.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: 8),
+            circleView.widthAnchor.constraint(equalToConstant: 30),
+            circleView.heightAnchor.constraint(equalToConstant: 30)
+            
         ])
     }
     
@@ -57,6 +69,7 @@ final class CalendarTableKitCell: UITableViewCell{
     override func prepareForReuse() {
         contentView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner,.layerMinXMinYCorner, .layerMaxXMinYCorner]
         contentView.layer.cornerRadius = 0
+        circleView.tintColor = .clear
         unCompleteTask()
     }
     
