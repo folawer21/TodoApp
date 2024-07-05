@@ -55,6 +55,14 @@ final class TaskManager: ObservableObject{
         }.count
     }
     
+    func isComplete(id: String) -> Bool{
+        guard let index = todoitems.firstIndex(where: { $0.id == id}) else {
+            return false
+        }
+        let item = todoitems[index]
+        return item.isDone
+    }
+    
     func makeComplete(id:String, complete:Bool){
         guard let index = todoitems.firstIndex(where: { $0.id == id}) else {
             return
@@ -68,12 +76,13 @@ final class TaskManager: ObservableObject{
             deadline: old.deadline,
             isDone: complete,
             createdAt: old.createdAt,
-            changedAt: old.changedAt
+            changedAt: Date()
         )
         todoitems[index] = new
+        print(new)
     }
     
-    func getCollectionByDate() -> [String: [String]]{
+    func getCollectionByDate() -> [String: [TodoItem]]{
         let result = collectionByDate()
         return result
     }
@@ -83,26 +92,28 @@ final class TaskManager: ObservableObject{
         return result
     }
     
-    private func collectionByDate() -> [String: [String]]{
-        var result: [String : [String]] = [:]
+    private func collectionByDate() -> [String: [TodoItem]]{
+        var result: [String : [TodoItem]] = [:]
         for todoitem in todoitems {
             guard let date = todoitem.deadline else {
                 if result.keys.contains("Другое"){
                     let text = todoitem.text
-                    result["Другое"]?.append(text)
+                    result["Другое"]?.append(todoitem)
                 }else{
                     let text = todoitem.text
-                    result["Другое"] = [text]
+                    result["Другое"] = [todoitem]
                 }
                 continue
             }
             let stringDate = outputFormatter.string(from: date)
             if result.keys.contains(stringDate){
-                let text = todoitem.text
-                result[stringDate]?.append(text)
+//                let text = todoitem.text
+//                result[stringDate]?.append(text)
+                result[stringDate]?.append(todoitem)
             }else{
-                let text = todoitem.text
-                result[stringDate] = [text]
+//                let text = todoitem.text
+//                result[stringDate] = [text]
+                result[stringDate] = [todoitem]
             }
         }
         print("arrayByDates: ",result)

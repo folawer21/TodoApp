@@ -16,6 +16,8 @@ struct CalendarWrapper: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> some UIViewController {
         let view = CalendarView()
         view.taskManager = self.taskManager
+//        let navVc = UINavigationController(rootViewController: view)
+//        return navVc
         return view
     }
     

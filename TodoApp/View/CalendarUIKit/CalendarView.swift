@@ -8,28 +8,58 @@ final class CalendarView: UIViewController{
     private let bottomBorder = UIView()
     private let topBorder = UIView()
     private let containerCollectionView = UIView()
-    private let host = UIHostingController(rootView: PlusButton())
+//    private let buttonHost = UIHostingController(rootView: PlusButton())
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collectionView
     }()
+    
+    private lazy var plusButton = {
+        let plusButton = UIButton(type: .custom)
+        plusButton.setImage(UIImage(named: "plus"), for: .normal)
+        plusButton.addTarget(self, action: #selector(didTapPlusButton), for: .touchUpInside)
+        plusButton.layer.shadowOffset = .zero
+        plusButton.layer.shadowRadius = 4
+        plusButton.layer.shadowColor = UIColor.black.cgColor
+        plusButton.layer.shadowOpacity = 0.4
+        return plusButton
+      }()
 //    private let plusButton = PlusButton()
 //    private var itemsArray: [String: [TodoItem]] = ["22.09":[TodoItem(text: "aaa", color: .gray, importance: .important, deadline: nil, isDone: false, createdAt: Date(), changedAt: nil),TodoItem(text: "BBB", color: .gray, importance: .important, deadline: nil, isDone: false, createdAt: Date(), changedAt: nil),
 //                                                             TodoItem(text: "cccc", color: .gray, importance: .important, deadline: nil, isDone: false, createdAt: Date(), changedAt: nil)],
 //                                                    "25.11": [ TodoItem(text: "11111", color: .gray, importance: .important, deadline: nil, isDone: false, createdAt: Date(), changedAt: nil),
 //                                                    TodoItem(text: "11111", color: .gray, importance: .important, deadline: nil, isDone: false, createdAt: Date(), changedAt: nil)]]
-    private var itemsArray: [String: [String]] = [:]
+    private var itemsArray: [String: [TodoItem]] = [:]
     private var dates: [String] = []
     
     private let collectionCellIdentifier = CalendarCollectionKitCell.reuseIdentifier
     private let tableCellIdentifier = CalendarTableKitCell.reuseIdentifier
     
+    override func viewWillAppear(_ animated: Bool) {
+    }
+    
+    override func viewIsAppearing(_ animated: Bool) {
+        print("isapperiang")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("didAppear")
+    }
+    
+
+    private func loadData(){
+        guard let datesArr = taskManager?.getDatesCollection(),
+              let items = taskManager?.getCollectionByDate() else {return }
+        dates = datesArr
+        itemsArray = items
+        print("result:", dates,itemsArray)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        navigationItem.title = "Мои дела"
         containerCollectionView.backgroundColor = Colors.greyForBackground
         containerCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -55,9 +85,11 @@ final class CalendarView: UIViewController{
         bottomBorder.translatesAutoresizingMaskIntoConstraints = false
         topBorder.translatesAutoresizingMaskIntoConstraints = false
         
+        plusButton.translatesAutoresizingMaskIntoConstraints = false
+        
         bottomBorder.backgroundColor = .gray
         topBorder.backgroundColor = .gray
-        host.view.backgroundColor = .clear
+//        buttonHost.view.backgroundColor = .clear
                 
         addSubViews()
         removeAutoresizeMask()
@@ -66,11 +98,8 @@ final class CalendarView: UIViewController{
         tableView.register(CalendarTableKitCell.self, forCellReuseIdentifier: tableCellIdentifier)
         tableView.register(HeaderViewKit.self, forHeaderFooterViewReuseIdentifier: HeaderViewKit.reuseIdentifier)
         collectionView.register(CalendarCollectionKitCell.self, forCellWithReuseIdentifier: collectionCellIdentifier)
-        guard let datesArr = taskManager?.getDatesCollection(),
-              let items = taskManager?.getCollectionByDate() else {return }
-        dates = datesArr
-        itemsArray = items
-        print("result:", dates)
+        loadData()
+//        print("result:", dates)
     
     }
     
@@ -80,22 +109,25 @@ final class CalendarView: UIViewController{
         view.addSubview(containerView)
         view.addSubview(containerCollectionView)
         containerView.addSubview(tableView)
+        containerView.addSubview(plusButton)
+        
         containerCollectionView.addSubview(collectionView)
         
         containerCollectionView.addSubview(topBorder)
         containerCollectionView.addSubview(bottomBorder)
         
-        host.willMove(toParent: self)
-        addChild(host)
-        containerView.addSubview(host.view)
-        host.didMove(toParent: self)
+        
+//        buttonHost.willMove(toParent: self)
+//        addChild(buttonHost)
+//        containerView.addSubview(buttonHost.view)
+//        buttonHost.didMove(toParent: self)
 //        view.addSubview(plusButton)
     }
     
     private func removeAutoresizeMask(){
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        host.view.translatesAutoresizingMaskIntoConstraints = false
+//        buttonHost.view.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func applyConstraints(){
@@ -138,11 +170,27 @@ final class CalendarView: UIViewController{
             tableView.bottomAnchor.constraint(equalTo: containerView.layoutMarginsGuide.bottomAnchor),
             tableView.topAnchor.constraint(equalTo: containerCollectionView.bottomAnchor),
             
-            host.view.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            host.view.bottomAnchor.constraint(equalTo: containerView.layoutMarginsGuide.bottomAnchor, constant: -20)
+            
+            plusButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            plusButton.bottomAnchor.constraint(equalTo: containerView.layoutMarginsGuide.bottomAnchor, constant: -20),
+//            plusButton.heightAnchor.constraint(equalToConstant: 30)
             
         ])
     }
+    
+    @objc private func didTapPlusButton() {
+        guard let taskManager = taskManager else {return }
+        let todoProd = TodoProduction(taskManager: taskManager, delegate: self, toggleOn: false, deadline: Calendar.current.date(
+              byAdding: .day,
+              value: 1,
+              to: Date()) ?? Date(),
+              selectedBrightness: 1.0,
+              selectedColor: .blue)
+        let hostingController = UIHostingController(rootView: todoProd)
+        self.present(hostingController,animated: true)
+       
+//        show(hostingController, sender: self)
+        }
 }
 
 //UITableView
@@ -152,9 +200,9 @@ extension CalendarView: UITableViewDataSource{
         
         let date = dates[indexPath.section]
         guard let items = itemsArray[date] else {return UITableViewCell()}
-        let cellText = items[indexPath.row]
+        let item = items[indexPath.row]
         cell.backgroundColor = Colors.greyForBackground
-        cell.label.text = cellText
+        cell.label.text = item.text
         cell.layer.masksToBounds = true
         cell.contentView.layer.masksToBounds = true
         if indexPath.row == 0 {
@@ -171,7 +219,9 @@ extension CalendarView: UITableViewDataSource{
             cell.contentView.layer.cornerRadius = 15
         }else{
         }
-
+        if item.isDone{
+            cell.completeTask()
+        }
         
         return cell
     }
@@ -225,13 +275,23 @@ extension CalendarView: UITableViewDataSource{
         return UISwipeActionsConfiguration(actions: [unDone])
     }
     private func markAsDone(indexPath: IndexPath){
-        guard let item = tableView.cellForRow(at: indexPath) as? CalendarTableKitCell else {return}
+        guard let item = tableView.cellForRow(at:indexPath) as? CalendarTableKitCell else {return}
         item.completeTask()
+        let date = dates[indexPath.section]
+        guard let todoArray = itemsArray[date] else {return}
+        let todo = todoArray[indexPath.row]
+        taskManager?.makeComplete(id: todo.id, complete: true)
+              
+        
     }
     
     private func markIsUnDone(indexPath: IndexPath){
         guard let item = tableView.cellForRow(at: indexPath) as? CalendarTableKitCell else {return}
         item.unCompleteTask()
+        let date = dates[indexPath.section]
+        guard let todoArray = itemsArray[date] else {return}
+        let todo = todoArray[indexPath.row]
+        taskManager?.makeComplete(id: todo.id, complete: false)
     }
 }
 
@@ -305,5 +365,14 @@ extension CalendarView: UICollectionViewDataSource{
 extension CalendarView: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 60, height: 60)
+    }
+}
+
+
+extension CalendarView: TodoProductionDelegate{
+    func screenWasClosen() {
+        loadData()
+        tableView.reloadData()
+        collectionView.reloadData()
     }
 }

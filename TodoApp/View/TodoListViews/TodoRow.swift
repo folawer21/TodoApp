@@ -7,18 +7,19 @@
 
 import SwiftUI
 struct TodoRow: View {
+    @EnvironmentObject var taskManager: TaskManager
     var id: String
-    @State var isCompleted: Bool
+    var isCompleted: Bool
     var importance: Importance
     var itemText: String
     var color: Color
     @State var isScreenShown: Bool = false
     var isHasDeadline: Bool 
     var deadline: Date?
-    @EnvironmentObject var taskManager: TaskManager
+    
     var body: some View {
         HStack{
-            CompleteButton(isCompleted: $isCompleted, importance: importance)
+            CompleteButton(isCompleted: isCompleted, importance: importance)
                 .onTapGesture(perform: completeButtonTapped)
             VStack(alignment: .leading){
                 HStack{
@@ -59,6 +60,7 @@ struct TodoRow: View {
         .strikethrough(isCompleted, pattern: .solid, color: .secondary)
         .sheet(isPresented: $isScreenShown){
             TodoProduction(
+                taskManager: taskManager,
                 id: id,
                 text: itemText,
                 toggleOn: isHasDeadline,
@@ -70,7 +72,6 @@ struct TodoRow: View {
                 selectedColor: color,
                 selectedImportance: importance
                 )
-            .environmentObject(taskManager)
         }
         .swipeActions(edge: .leading){
             completeButton
@@ -86,8 +87,8 @@ struct TodoRow: View {
     }
     var completeButton: some View {
         Button(
-            action: {isCompleted.toggle()
-                taskManager.makeComplete(id: id, complete: isCompleted)
+            action: {/*isCompleted.toggle()*/
+                taskManager.makeComplete(id: id, complete: !isCompleted)
                         },
             label: {
                 Image(systemName: "checkmark.circle")
@@ -132,12 +133,12 @@ struct TodoRow: View {
     }()
     
     func completeButtonTapped(){
-        isCompleted.toggle()
-        taskManager.makeComplete(id: id, complete: isCompleted)
+//        isCompleted.toggle()
+        taskManager.makeComplete(id: id, complete: !isCompleted)
     }
     
     func showRefactorView(){
-        isCompleted.toggle()
+        
     }
 }
 

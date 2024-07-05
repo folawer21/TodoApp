@@ -14,8 +14,6 @@ struct TodoList: View {
             List(){
                 Section(header: HeaderView(count: taskManager.getDoneCount())){
                     ForEach(taskManager.todoitems, id: \.id) { item in
-//                        let item = taskManager.todoitems[index]
-//                        Text("\(item)")
                         TodoRow(
                             id: item.id,
                             isCompleted: item.isDone,
@@ -42,13 +40,18 @@ struct TodoList: View {
                 plusButton
             }
             .sheet(isPresented: $isMakeNewShown){
-                TodoProduction(toggleOn: false,deadline: Calendar.current.date(
-                    byAdding: .day,
-                    value: 1,
-                    to: Date()
-                ) ?? Date()
-                    ,selectedBrightness: 1.0,selectedColor: .blue)
-                    .environmentObject(taskManager)
+                TodoProduction(
+                    taskManager:taskManager,
+                    toggleOn: false,
+                    deadline: Calendar.current.date(
+                        byAdding: .day,
+                        value: 1,
+                        to: Date()
+                    ) ?? Date()
+                    ,
+                    selectedBrightness: 1.0,
+                    selectedColor: .blue
+                )
             }
             
             

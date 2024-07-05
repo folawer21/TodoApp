@@ -8,7 +8,9 @@
 import SwiftUI
 
 //Добавить кнопку показать
-//Добавить текст в две строки в коллекции
+//Проблема в обновлении даты второго экрана
+//self.present(hostingController,animated: true)
+
 struct MainView: View {
     var taskManager: TaskManager = TaskManager()
     var body: some View {

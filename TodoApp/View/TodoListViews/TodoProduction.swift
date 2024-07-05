@@ -7,9 +7,14 @@
 
 import SwiftUI
 
+protocol TodoProductionDelegate: AnyObject{
+    func screenWasClosen()
+}
+
 struct TodoProduction: View {
 //    @State var isReadyToSave: Bool
-    @EnvironmentObject var taskManager: TaskManager
+    var taskManager: TaskManager
+    weak var delegate: TodoProductionDelegate?
     @State var id: String?
     @State var text: String = ""
     @State var toggleOn: Bool
@@ -105,6 +110,7 @@ struct TodoProduction: View {
                 Section(){
                     Button(action: {
                         taskManager.removeItemById(id: id ?? "" )
+                        self.delegate?.screenWasClosen()
                         self.presentationMode.wrappedValue.dismiss()
                     },
                            label: {
@@ -130,7 +136,9 @@ struct TodoProduction: View {
             .toolbar{
                 ToolbarItem(placement: .topBarLeading){
                     Button("Отменить"){
+                        self.delegate?.screenWasClosen()
                         self.presentationMode.wrappedValue.dismiss()
+                        
                     }
                 }
                 
@@ -148,8 +156,8 @@ struct TodoProduction: View {
                             changedAt: nil
                         )
                         taskManager.addNewItem(item: item)
+                        self.delegate?.screenWasClosen()
                         self.presentationMode.wrappedValue.dismiss()
-
                     }
                     .disabled(text == "")
                 }

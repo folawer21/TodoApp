@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CompleteButton: View {
-   @Binding var isCompleted: Bool
+   var isCompleted: Bool
    var importance: Importance
    
     var body: some View {
