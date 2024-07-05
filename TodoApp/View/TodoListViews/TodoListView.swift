@@ -50,7 +50,8 @@ struct TodoList: View {
                     ) ?? Date()
                     ,
                     selectedBrightness: 1.0,
-                    selectedColor: .blue
+                    selectedColor: .blue,
+                    selectedCategory: .red
                 )
             }
             

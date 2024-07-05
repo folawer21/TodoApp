@@ -49,7 +49,6 @@ static func parse(json: Any) -> TodoItem?{
         let changedAt: Date? = nil
     let todoItem = TodoItem(id: id, text: text , color:color, importance: importance, deadline: deadline, isDone: isDone, createdAt: createdAt, changedAt: changedAt)
         return todoItem
-      
     }
     
     var json: Any{

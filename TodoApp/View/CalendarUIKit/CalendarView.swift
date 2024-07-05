@@ -185,7 +185,9 @@ final class CalendarView: UIViewController{
               value: 1,
               to: Date()) ?? Date(),
               selectedBrightness: 1.0,
-              selectedColor: .blue)
+              selectedColor: .blue,
+              selectedCategory: .red
+        )
         let hostingController = UIHostingController(rootView: todoProd)
         self.present(hostingController,animated: true)
        

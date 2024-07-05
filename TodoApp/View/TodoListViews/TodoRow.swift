@@ -70,7 +70,8 @@ struct TodoRow: View {
                             to: Date()
                         ) ?? Date()) ,
                 selectedColor: color,
-                selectedImportance: importance
+                selectedImportance: importance,
+                selectedCategory: .red
                 )
         }
         .swipeActions(edge: .leading){
