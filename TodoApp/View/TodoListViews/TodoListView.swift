@@ -10,32 +10,53 @@ import CocoaLumberjackSwift
 
 struct TodoList: View {
     @State var isMakeNewShown: Bool = false
+    @State var isShown: Bool = false
     @StateObject var taskManager: TaskManager
     var body: some View {
             List(){
-                Section(header: HeaderView(count: taskManager.getDoneCount())){
-                    ForEach(taskManager.todoitems, id: \.id) { item in
-                        TodoRow(
-                            id: item.id,
-                            isCompleted: item.isDone,
-                            importance: item.importance,
-                            itemText: item.text,
-                            color: item.color,
-                            isHasDeadline: item.deadline != nil ? true : false,
-                            deadline: item.deadline ?? Date(),
-                            categoty: item.category
-                        )
-                            .environmentObject(taskManager)
-                           
-                    }
-                    NewItemRowView()
-                        .onTapGesture(perform:{ _ in 
-                            isMakeNewShown.toggle()
-                            DDLogInfo("Item creating screen showed")
-                        })
-                        
+                Section(content: {
+                        ForEach( taskManager.todoitems, id: \.id) { item in
+                            if !isShown && item.isDone == true{
+                                
+                            }else{
+                                TodoRow(
+                                    id: item.id,
+                                    isCompleted: item.isDone,
+                                    importance: item.importance,
+                                    itemText: item.text,
+                                    color: item.color,
+                                    isHasDeadline: item.deadline != nil ? true : false,
+                                    deadline: item.deadline ?? Date(),
+                                    categoty: item.category
+                                )
+                                    .environmentObject(taskManager)
+                            }
                 }
-           
+                NewItemRowView()
+                    .onTapGesture(perform:{ _ in
+                        isMakeNewShown.toggle()
+                        DDLogInfo("Item creating screen showed")
+                    })
+                    
+            }
+                , header:  {
+                    HStack{
+                        Text("Выполнено - \(taskManager.getDoneCount())")
+                            .font(.subheadline)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            showButtonTapped()
+                        },
+                               label: {
+                            Text(isShown == true ? "Скрыть": "Показать")
+                        })
+                        .font(.subheadline)
+                        
+                    }
+                    .textCase(nil)
+                })
             }
             .multilineTextAlignment(.leading)
             .overlay(alignment: .bottom){
@@ -78,6 +99,9 @@ struct TodoList: View {
         
     }
     
+    private func showButtonTapped(){
+        isShown.toggle()
+    }
 }
 
 #Preview {

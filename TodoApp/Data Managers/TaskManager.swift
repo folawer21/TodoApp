@@ -10,6 +10,11 @@ import CocoaLumberjackSwift
 
 final class TaskManager: ObservableObject{
     @Published private(set) var todoitems: [TodoItem]
+    var uncompletedTodoitems: [TodoItem] {
+        get{
+            todoitems.filter{ $0.isDone == false}
+        }
+    }
     let dateFormatter = DateFormatter()
     let outputFormatter = DateFormatter()
 
