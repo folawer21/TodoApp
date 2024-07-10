@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CocoaLumberjackSwift
 
 struct TodoList: View {
     @State var isMakeNewShown: Bool = false
@@ -30,6 +31,7 @@ struct TodoList: View {
                     NewItemRowView()
                         .onTapGesture(perform:{ _ in 
                             isMakeNewShown.toggle()
+                            DDLogInfo("Item creating screen showed")
                         })
                         
                 }
@@ -61,6 +63,7 @@ struct TodoList: View {
    
     var plusButton: some View {
        Button(action: {
+           DDLogInfo("Item creating screen showed")
            isMakeNewShown.toggle()
         },
                label: {
@@ -75,10 +78,6 @@ struct TodoList: View {
         
     }
     
-    
-    func newButtonTapped(){
-        print("tapped")
-    }
 }
 
 #Preview {

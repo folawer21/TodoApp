@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CocoaLumberjackSwift
 
 protocol TodoProductionDelegate: AnyObject{
     func screenWasClosen()
@@ -109,6 +110,7 @@ struct TodoProduction: View {
                 
                 Section(){
                     Button(action: {
+                        DDLogInfo("TodoProduction screen closed")
                         taskManager.removeItemById(id: id ?? "" )
                         self.delegate?.screenWasClosen()
                         self.presentationMode.wrappedValue.dismiss()
@@ -126,8 +128,6 @@ struct TodoProduction: View {
                     .cornerRadius(16)
                     .frame(height: 36)
                     .disabled(text == "")
-                   
-                    
                 }
             }
                
@@ -136,6 +136,7 @@ struct TodoProduction: View {
             .toolbar{
                 ToolbarItem(placement: .topBarLeading){
                     Button("Отменить"){
+                        DDLogInfo("Item creating/detailing cancelled.\nTodoProduction screen closed")
                         self.delegate?.screenWasClosen()
                         self.presentationMode.wrappedValue.dismiss()
                         
@@ -144,7 +145,7 @@ struct TodoProduction: View {
                 
                 ToolbarItem(placement: .topBarTrailing){
                     Button("Сохранить"){
-                        
+                        DDLogInfo("TodoProduction screen closed")
                         let item = TodoItem(
                             id: id ?? UUID().uuidString,
                             text: text,

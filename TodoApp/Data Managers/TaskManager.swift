@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CocoaLumberjackSwift
 
 final class TaskManager: ObservableObject{
     @Published private(set) var todoitems: [TodoItem]
@@ -25,27 +26,36 @@ final class TaskManager: ObservableObject{
         guard let index = todoitems.firstIndex(where: { $0.id == id}) else {
             return nil
         }
+        DDLogWarn("Todo item is already added")
         return index
     }
     
     func setItems(items: [TodoItem]){
+        DDLogInfo("Todo's list setted")
         todoitems = items
     }
     
     func addNewItem(item: TodoItem){
         if let index = checkIfAlreadyHere(id: item.id){
+            DDLogWarn("Todo didn't added because item with id = \(item.id) is already here")
             todoitems[index] = item
         }
         else{
+            DDLogInfo("New todo added")
             todoitems.append(item)
         }
     }
     
     func removeItem(item: TodoItem){
+        DDLogInfo("Todo with id = \(item.id) removed")
         todoitems.removeAll(where: {$0.id == item.id})
     }
     
     func removeItemById(id: String){
+        if id == ""{
+            DDLogWarn("Id is empty. Todo item isn't removed")
+        }
+        DDLogInfo("Todo with id = \(id) removed")
         todoitems.removeAll(where: {$0.id == id})
     }
     
@@ -57,6 +67,7 @@ final class TaskManager: ObservableObject{
     
     func isComplete(id: String) -> Bool{
         guard let index = todoitems.firstIndex(where: { $0.id == id}) else {
+            DDLogWarn("Item with id = \(id) is not found")
             return false
         }
         let item = todoitems[index]
@@ -65,6 +76,8 @@ final class TaskManager: ObservableObject{
     
     func makeComplete(id:String, complete:Bool){
         guard let index = todoitems.firstIndex(where: { $0.id == id}) else {
+            DDLogWarn("Item with id = \(id) is not found")
+
             return
         }
         let old = todoitems[index]
@@ -80,6 +93,8 @@ final class TaskManager: ObservableObject{
             categorty: old.category
         )
         todoitems[index] = new
+        
+        DDLogInfo("Todo with id = \(id) is completed = \(complete)")
     }
     
     func getCollectionByDate() -> [String: [TodoItem]]{

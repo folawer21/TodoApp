@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import CocoaLumberjackSwift
+
 struct TodoRow: View {
     @EnvironmentObject var taskManager: TaskManager
     var id: String
@@ -37,6 +39,7 @@ struct TodoRow: View {
                     Text(itemText)
                         .font(.system(size: 17))
                         .lineLimit(3)
+                        .strikethrough(isCompleted, pattern: .solid, color: .secondary)
                 }
                 if isHasDeadline{
                     HStack{
@@ -58,7 +61,8 @@ struct TodoRow: View {
             })
             .foregroundColor(.secondary)
         }
-        .strikethrough(isCompleted, pattern: .solid, color: .secondary)
+        .foregroundColor(isCompleted == true ? .secondary : .black)
+//        .strikethrough(isCompleted, pattern: .solid, color: .secondary)
         .sheet(isPresented: $isScreenShown){
             TodoProduction(
                 taskManager: taskManager,
@@ -118,7 +122,9 @@ struct TodoRow: View {
      
      var infoButton: some View {
          Button(
-            action: {isScreenShown.toggle()},
+            action: {
+                DDLogInfo("Item details screen showed")
+                isScreenShown.toggle()},
              label: {
                  Image(systemName: "info.circle.fill")
              }
@@ -137,10 +143,7 @@ struct TodoRow: View {
     func completeButtonTapped(){
         taskManager.makeComplete(id: id, complete: !isCompleted)
     }
-    
-    func showRefactorView(){
-        
-    }
+
 }
 
 #Preview {
