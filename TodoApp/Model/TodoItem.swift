@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FileCache
 
 enum Importance: String {
     case important = "important"
@@ -13,7 +14,7 @@ enum Importance: String {
     case unimportant = "unimportant"
 }
 
-struct TodoItem: Identifiable {
+struct TodoItem: Identifiable, JSONableItem {
     let id: String
     let text: String
     let importance: Importance

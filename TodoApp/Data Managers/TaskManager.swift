@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import FileCache
 import CocoaLumberjackSwift
 
 final class TaskManager: ObservableObject {
+    private var fileCache = FileCache<TodoItem>()
     @Published private(set) var todoitems: [TodoItem]
     var uncompletedTodoitems: [TodoItem] {
             todoitems.filter {$0.isDone == false}
