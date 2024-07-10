@@ -8,7 +8,7 @@
 import SwiftUI
 import CocoaLumberjackSwift
 
-protocol TodoProductionDelegate: AnyObject{
+protocol TodoProductionDelegate: AnyObject {
     func screenWasClosen()
 }
 
@@ -25,7 +25,6 @@ struct TodoProduction: View {
     @State var selectedColor: Color
     @State var selectedImportance: Importance = .regular
     @State var selectedCategory: Color
-    
     @Environment(\.presentationMode) var presentationMode
 
     var formatter = {
@@ -34,32 +33,30 @@ struct TodoProduction: View {
         formatter.locale = Locale(identifier: "ru_RU")
         return formatter
     }()
-    
     var body: some View {
-        NavigationStack{
-            Form{
-                Section{
+        NavigationStack {
+            Form {
+                Section {
                     TextField("Что надо сделать?", text: $text, axis: .vertical)
                         .lineLimit(4...)
                 }
-                Section{
-                    Group(){
-                        HStack{
+                Section {
+                    Group {
+                        HStack {
                             Text("Важность")
                             Spacer()
                             CustomSegmentedControl(selectedImportance: $selectedImportance)
                         }
-                        HStack{
+                        HStack {
                             Text("Категория")
                             Spacer()
                             CategoryPicker(selectedColor: $selectedCategory)
-                            
                         }
-                        HStack{
+                        HStack {
                             Text("Цвет")
                             Spacer()
                             Button(action: {
-                                withAnimation{
+                                withAnimation {
                                     colorPickerIsShown.toggle()
                                 }
                             }, label: {
@@ -69,19 +66,15 @@ struct TodoProduction: View {
                                     .brightness(1 - selectedBrightness)
                             })
                         }
-                       
-                       
-                        if colorPickerIsShown{
+                        if colorPickerIsShown {
                             CustomColorPickerView(selectedColor: $selectedColor, brightness: $selectedBrightness)
                         }
-                       
-                        
-                        HStack{
+                        HStack {
                             VStack(alignment: .leading) {
                                 Text("Сделать до")
                                 if toggleOn {
                                     Button(action: {
-                                        withAnimation{
+                                        withAnimation {
                                             calendarIsShown.toggle()
                                         }
                                     },
@@ -89,17 +82,14 @@ struct TodoProduction: View {
                                         Text(formatter.string(from: deadline))
                                             .font(.footnote)
                                             .fontWeight(.bold)
-                                            
                                     })
                                 }
                             }
-                            
                             Spacer()
-                            Toggle("",isOn: $toggleOn)
-                            
+                            Toggle("", isOn: $toggleOn)
                         }
-                        if calendarIsShown && toggleOn{
-                            DatePicker("", selection: $deadline,displayedComponents: .date)
+                        if calendarIsShown && toggleOn {
+                            DatePicker("", selection: $deadline, displayedComponents: .date)
                                 .datePickerStyle(.graphical)
                                 .environment(\.locale, Locale(identifier: "ru_RU"))
                                 .animation(.snappy)
@@ -107,8 +97,7 @@ struct TodoProduction: View {
                         }
                     }
                 }
-                
-                Section(){
+                Section {
                     Button(action: {
                         DDLogInfo("TodoProduction screen closed")
                         taskManager.removeItemById(id: id ?? "" )
@@ -116,35 +105,30 @@ struct TodoProduction: View {
                         self.presentationMode.wrappedValue.dismiss()
                     },
                            label: {
-                        HStack{
+                        HStack {
                             Spacer()
                             Text("Удалить")
                                 .foregroundColor(text != "" ? .red : .secondary)
                             Spacer()
                         }
-                        
-                            
                     })
                     .cornerRadius(16)
                     .frame(height: 36)
                     .disabled(text == "")
                 }
             }
-               
             .navigationTitle("Дело")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar{
-                ToolbarItem(placement: .topBarLeading){
-                    Button("Отменить"){
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Отменить") {
                         DDLogInfo("Item creating/detailing cancelled.\nTodoProduction screen closed")
                         self.delegate?.screenWasClosen()
                         self.presentationMode.wrappedValue.dismiss()
-                        
                     }
                 }
-                
-                ToolbarItem(placement: .topBarTrailing){
-                    Button("Сохранить"){
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Сохранить") {
                         DDLogInfo("TodoProduction screen closed")
                         let item = TodoItem(
                             id: id ?? UUID().uuidString,
@@ -165,13 +149,5 @@ struct TodoProduction: View {
                 }
             }
         }
-       
-
     }
-        
 }
-//
-//#Preview {
-//    TodoProduction(taskManager: TaskManager(), toggleOn: false, deadline: Date(), selectedColor: .blue,selectedCategory: .red)
-//}
-

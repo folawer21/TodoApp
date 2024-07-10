@@ -7,10 +7,8 @@
 
 import UIKit
 
-final class CalendarCollectionKitCell: UICollectionViewCell{
-    
+final class CalendarCollectionKitCell: UICollectionViewCell {
     static let reuseIdentifier = "DateCell"
-      
       let dateLabel: UILabel = {
           let label = UILabel()
           label.translatesAutoresizingMaskIntoConstraints = false
@@ -18,7 +16,6 @@ final class CalendarCollectionKitCell: UICollectionViewCell{
           label.numberOfLines = 0
           return label
       }()
-      
       override init(frame: CGRect) {
           super.init(frame: frame)
           contentView.addSubview(dateLabel)
@@ -27,11 +24,9 @@ final class CalendarCollectionKitCell: UICollectionViewCell{
               dateLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
           ])
       }
-      
       required init?(coder: NSCoder) {
           fatalError("init(coder:) has not been implemented")
       }
-    
     override func prepareForReuse() {
         self.layer.cornerRadius = 0
         self.layer.borderColor = .none
@@ -39,4 +34,3 @@ final class CalendarCollectionKitCell: UICollectionViewCell{
         self.backgroundColor = .clear
     }
 }
-

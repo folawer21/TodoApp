@@ -9,10 +9,9 @@ import SwiftUI
 
 struct CustomSegmentedControl: View {
     @Binding var selectedImportance: Importance
-    
     var body: some View {
         HStack(spacing: 0) {
-            Button(action: {  }) {
+            Button(action: {}) {
                 Image(systemName: "arrow.down")
                     .imageScale(.medium)
                     .fontWeight(.bold)
@@ -25,15 +24,11 @@ struct CustomSegmentedControl: View {
             .onTapGesture {
                 selectedImportance = .unimportant
             }
-        
-            
             Divider().frame(height: 31.5)
-            
-            Button(action: { }) {
+            Button(action: {}) {
                 Text("Нет")
                     .font(.system(size: 15))
                     .foregroundColor(.black)
-                    
             }
             .padding()
             .background(selectedImportance == .regular ? Color.white : Color.clear)
@@ -42,10 +37,7 @@ struct CustomSegmentedControl: View {
             .onTapGesture {
                 selectedImportance = .regular
             }
-           
-
             Divider().frame(height: 31.5)
-            
             Button(action: { }) {
                 Image(systemName: "exclamationmark.2")
                     .imageScale(.medium)
@@ -60,18 +52,17 @@ struct CustomSegmentedControl: View {
             .onTapGesture {
                 selectedImportance = .important
             }
-            
         }
 //        .padding()
         .background(Color.white.opacity(0.2))
-        .frame(width: 150 , height: 36)
+        .frame(width: 150, height: 36)
         .cornerRadius(8.91)
         .shadow(radius: 2)
     }
 }
+
 struct ContentView: View {
     @State private var selectedImportance: Importance = .regular
-    
     var body: some View {
         Form {
             Section {
@@ -80,7 +71,6 @@ struct ContentView: View {
                         Text("Важность")
                         Spacer()
                         CustomSegmentedControl(selectedImportance: $selectedImportance)
-                           
                     }
                     Divider()
                     HStack {
@@ -93,9 +83,6 @@ struct ContentView: View {
         }
     }
 }
-
-
-
 
 #Preview {
     ContentView()

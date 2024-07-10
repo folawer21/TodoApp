@@ -17,7 +17,7 @@ struct PlusButton: View {
                 .imageScale(.large)
                 .foregroundColor(.white)
                 .frame(width: 44, height: 44)
-                .background(Color.blue.shadow(.drop(color: .black.opacity(0.25), radius: 7, x: 0 , y: 10)), in: .circle)
+                .background(Color.blue.shadow(.drop(color: .black.opacity(0.25), radius: 7, x: 0, y: 10)), in: .circle)
         })
     }
 }

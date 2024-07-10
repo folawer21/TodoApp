@@ -8,15 +8,15 @@
 import Foundation
 import SwiftUI
 
-extension View{
+extension View {
     @ViewBuilder
-    func isShown(shown: Bool) -> some View{
-        if shown{
-            withAnimation(.default){
+    func isShown(shown: Bool) -> some View {
+        if shown {
+            withAnimation(.default) {
                 self
             }
-        }else{
-            withAnimation(.default){
+        } else {
+            withAnimation(.default) {
                 self.hidden()
             }
         }

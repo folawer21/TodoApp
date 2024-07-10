@@ -9,15 +9,13 @@ import SwiftUI
 
 struct CategoryPicker: View {
     @Binding var selectedColor: Color
-    let colors = [Color.red, Color.green, Color.blue,Color.clear]
-    let colorNames = ["Работа", "Хобби", "Учеба","Другое"]
-    
+    let colors = [Color.red, Color.green, Color.blue, Color.clear]
+    let colorNames = ["Работа", "Хобби", "Учеба", "Другое"]
     var body: some View {
         VStack {
             Picker(selection: $selectedColor, label: Text("Выберите цвет")) {
                 ForEach(0..<colors.count) { index in
                     HStack {
-
                         Text(self.colorNames[index])
                             .font(.system(size: 16))
                             .frame(width: 80)
@@ -27,14 +25,13 @@ struct CategoryPicker: View {
                     }.tag(colors[index])
                 }
             }
-            .pickerStyle(WheelPickerStyle()) 
-            .frame(width: 120 ,height: 45)
-
+            .pickerStyle(WheelPickerStyle())
+            .frame(width: 120, height: 45)
         }
     }
 }
 
-//#Preview {
+// #Preview {
 //
 //    CategoryPicker(selectedColor: .red)
-//}
+// }
