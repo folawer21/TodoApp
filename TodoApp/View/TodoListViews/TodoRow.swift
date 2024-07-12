@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import CocoaLumberjackSwift
+
 struct TodoRow: View {
     @EnvironmentObject var taskManager: TaskManager
     var id: String
@@ -14,22 +16,21 @@ struct TodoRow: View {
     var itemText: String
     var color: Color
     @State var isScreenShown: Bool = false
-    var isHasDeadline: Bool 
+    var isHasDeadline: Bool
     var deadline: Date?
     var categoty: Color
-    
     var body: some View {
-        HStack{
+        HStack {
             CompleteButton(isCompleted: isCompleted, importance: importance)
                 .onTapGesture(perform: completeButtonTapped)
-            VStack(alignment: .leading){
-                HStack{
+            VStack(alignment: .leading) {
+                HStack {
                     if importance == .important {
                         Image(systemName: "exclamationmark.2")
                             .foregroundColor(.red)
                             .fontWeight(.bold)
                     }
-                    if importance == .unimportant{
+                    if importance == .unimportant {
                         Image("downArrow")
                             .foregroundColor(.secondary)
                             .fontWeight(.bold)
@@ -37,9 +38,10 @@ struct TodoRow: View {
                     Text(itemText)
                         .font(.system(size: 17))
                         .lineLimit(3)
+                        .strikethrough(isCompleted, pattern: .solid, color: .secondary)
                 }
-                if isHasDeadline{
-                    HStack{
+                if isHasDeadline {
+                    HStack {
                         Image(systemName: "calendar")
                         Text(formatter.string(from: deadline ?? Date.now))
                     }
@@ -49,7 +51,7 @@ struct TodoRow: View {
             }
             Spacer()
             RoundedRectangle(cornerRadius: 15)
-                .frame(width: 100,height: 5)
+                .frame(width: 100, height: 5)
                 .foregroundColor(color)
             Spacer()
             Button(action: {isScreenShown.toggle()},
@@ -58,8 +60,9 @@ struct TodoRow: View {
             })
             .foregroundColor(.secondary)
         }
-        .strikethrough(isCompleted, pattern: .solid, color: .secondary)
-        .sheet(isPresented: $isScreenShown){
+        .foregroundColor(isCompleted == true ? .secondary : .black)
+//        .strikethrough(isCompleted, pattern: .solid, color: .secondary)
+        .sheet(isPresented: $isScreenShown) {
             TodoProduction(
                 taskManager: taskManager,
                 id: id,
@@ -69,23 +72,19 @@ struct TodoRow: View {
                             byAdding: .day,
                             value: 1,
                             to: Date()
-                        ) ?? Date()) ,
+                        ) ?? Date()),
                 selectedColor: color,
                 selectedImportance: importance,
                 selectedCategory: categoty
                 )
         }
-        .swipeActions(edge: .leading){
+        .swipeActions(edge: .leading) {
             completeButton
         }
-        
-        .swipeActions(edge: .trailing){
+        .swipeActions(edge: .trailing) {
             deleteButton
             infoButton
         }
-       
-    
-     
     }
     var completeButton: some View {
         Button(
@@ -103,7 +102,6 @@ struct TodoRow: View {
         )
         .tint(.green)
     }
-        
     var deleteButton: some View {
          Button(
              action: {
@@ -115,16 +113,17 @@ struct TodoRow: View {
          )
          .tint(.red)
      }
-     
      var infoButton: some View {
          Button(
-            action: {isScreenShown.toggle()},
+            action: {
+                DDLogInfo("Item details screen showed")
+                isScreenShown.toggle()},
              label: {
                  Image(systemName: "info.circle.fill")
              }
          )
      }
-    var backgroundColor: Color{
+    var backgroundColor: Color {
         .clear
     }
     var formatter = {
@@ -133,17 +132,19 @@ struct TodoRow: View {
         formatter.locale = Locale(identifier: "ru_RU")
         return formatter
     }()
-    
-    func completeButtonTapped(){
+    func completeButtonTapped() {
         taskManager.makeComplete(id: id, complete: !isCompleted)
-    }
-    
-    func showRefactorView(){
-        
     }
 }
 
 #Preview {
-    TodoRow(id:"asddas", isCompleted: false, importance: .important, itemText: "AAAAAAA",
-            color: .blue, isHasDeadline: false, categoty: .purple)
+    TodoRow(
+        id: "asddas",
+        isCompleted: false,
+        importance: .important,
+        itemText: "AAAAAAA",
+        color: .blue,
+        isHasDeadline: false,
+        categoty: .purple
+    )
 }

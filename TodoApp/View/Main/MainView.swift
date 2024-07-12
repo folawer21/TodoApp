@@ -6,22 +6,17 @@
 //
 
 import SwiftUI
-
-//Добавить кнопку показать
-//Проблема в обновлении даты второго экрана
-//self.present(hostingController,animated: true)
-
+// Добавить кнопку показать
 struct MainView: View {
     var taskManager: TaskManager = TaskManager()
     var body: some View {
-        NavigationView(){
-            ZStack{
+        NavigationView {
+            ZStack {
                 TodoList(taskManager: taskManager)
                     .navigationTitle("Мои дела").navigationBarTitleDisplayMode(.large)
-                    
                     .toolbar(content: {
-                        ToolbarItem(placement: .topBarLeading){
-                            NavigationLink(){
+                        ToolbarItem(placement: .topBarLeading) {
+                            NavigationLink {
                                 CalendarWrapper(taskManager: taskManager)
                                     .navigationTitle("Мои дела").navigationBarTitleDisplayMode(.inline)
                             } label: {
@@ -29,12 +24,10 @@ struct MainView: View {
                             }
                         }
                     })
-                
             }
         }
     }
 }
-
 #Preview {
     MainView()
 }

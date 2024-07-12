@@ -14,7 +14,7 @@ struct NewItemRowView: View {
                label: {
             Text("Новое")
                 .foregroundStyle(Color.gray)
-                .padding(.leading,32)
+                .padding(.leading, 32)
         })
     }
 }
