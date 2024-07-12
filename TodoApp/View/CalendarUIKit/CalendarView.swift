@@ -217,7 +217,10 @@ extension CalendarView: UITableViewDelegate {
 }
 // UICollectionView
 extension CalendarView: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionCellIdentifier, for: indexPath) as? CalendarCollectionKitCell else {return UICollectionViewCell()}
         var text = dates[indexPath.row]
         if indexPath.row == 0 && indexPath.section == 0 {
@@ -268,7 +271,11 @@ extension CalendarView: UICollectionViewDataSource {
 }
 
 extension CalendarView: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
         return CGSize(width: 60, height: 60)
     }
 }

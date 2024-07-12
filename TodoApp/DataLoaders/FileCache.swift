@@ -5,9 +5,9 @@
 //  Created by Александр  Сухинин on 18.06.2024.
 //
 
-//import Foundation
+// import Foundation
 //
-//final class FileCache {
+// final class FileCache {
 //    enum FileCacheErrors: Error {
 //        case fileDoesntExist
 //        case fileNotFound
@@ -76,5 +76,5 @@
 //        let url = directory.appendingPathComponent(name)
 //        return url
 //    }
-//}
+// }
 //
