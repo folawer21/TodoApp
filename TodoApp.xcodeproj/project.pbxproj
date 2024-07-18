@@ -22,6 +22,8 @@
 		3E33C7E42C374FB40087F2D8 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E33C7D42C374FB40087F2D8 /* CalendarView.swift */; };
 		3E33C7E72C37522A0087F2D8 /* UILabel.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E33C7E62C37522A0087F2D8 /* UILabel.extension.swift */; };
 		3E33C7EE2C384BE60087F2D8 /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E33C7ED2C384BE60087F2D8 /* CategoryPicker.swift */; };
+		3EB9472C2C49A751004B89C2 /* NetworkDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB9472B2C49A751004B89C2 /* NetworkDefault.swift */; };
+		3EB947302C49A839004B89C2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB9472F2C49A839004B89C2 /* NetworkService.swift */; };
 		3EED72F02C1F2BF000B55F2F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EED72EF2C1F2BF000B55F2F /* SceneDelegate.swift */; };
 		3EED72F52C1F2BF000B55F2F /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 3EED72F42C1F2BF000B55F2F /* Base */; };
 		3EED72F82C1F2BF000B55F2F /* TodoApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3EED72F62C1F2BF000B55F2F /* TodoApp.xcdatamodeld */; };
@@ -69,6 +71,8 @@
 		3E33C7D42C374FB40087F2D8 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		3E33C7E62C37522A0087F2D8 /* UILabel.extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel.extension.swift; sourceTree = "<group>"; };
 		3E33C7ED2C384BE60087F2D8 /* CategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPicker.swift; sourceTree = "<group>"; };
+		3EB9472B2C49A751004B89C2 /* NetworkDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDefault.swift; sourceTree = "<group>"; };
+		3EB9472F2C49A839004B89C2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		3EED72EA2C1F2BF000B55F2F /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EED72EF2C1F2BF000B55F2F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3EED72F42C1F2BF000B55F2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 		3E0D95612C41C10E007D490B /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				3EB9472E2C49A829004B89C2 /* NetworkService */,
+				3EB9472D2C49A81E004B89C2 /* NetworkDefault */,
 				3E0D95652C41C16A007D490B /* MockForTests */,
 				3E0D95622C41C11C007D490B /* Extensions */,
 			);
@@ -244,6 +250,22 @@
 				3EED73862C2F4B2500B55F2F /* TaskManager.swift */,
 			);
 			path = "Data Managers";
+			sourceTree = "<group>";
+		};
+		3EB9472D2C49A81E004B89C2 /* NetworkDefault */ = {
+			isa = PBXGroup;
+			children = (
+				3EB9472B2C49A751004B89C2 /* NetworkDefault.swift */,
+			);
+			path = NetworkDefault;
+			sourceTree = "<group>";
+		};
+		3EB9472E2C49A829004B89C2 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				3EB9472F2C49A839004B89C2 /* NetworkService.swift */,
+			);
+			path = NetworkService;
 			sourceTree = "<group>";
 		};
 		3EED72E12C1F2BF000B55F2F = {
@@ -476,6 +498,7 @@
 				3EED736D2C2CD63200B55F2F /* HeaderView.swift in Sources */,
 				3E33C7DA2C374FB40087F2D8 /* CalendarCollectionKitCell.swift in Sources */,
 				3EED73852C2F458D00B55F2F /* Color.extension.swift in Sources */,
+				3EB947302C49A839004B89C2 /* NetworkService.swift in Sources */,
 				3E33C7E42C374FB40087F2D8 /* CalendarView.swift in Sources */,
 				3EED737F2C2E23A900B55F2F /* TodoProduction.swift in Sources */,
 				3EED737B2C2E0AEA00B55F2F /* View.extension.swift in Sources */,
@@ -487,6 +510,7 @@
 				3EED731A2C21F7F300B55F2F /* TodoItem.swift in Sources */,
 				3EED73872C2F4B2500B55F2F /* TaskManager.swift in Sources */,
 				3E33C7EE2C384BE60087F2D8 /* CategoryPicker.swift in Sources */,
+				3EB9472C2C49A751004B89C2 /* NetworkDefault.swift in Sources */,
 				3EED73832C2F41C400B55F2F /* CustomColorPickerView.swift in Sources */,
 				3EED72F02C1F2BF000B55F2F /* SceneDelegate.swift in Sources */,
 				3EED731F2C26116800B55F2F /* FileCache.swift in Sources */,

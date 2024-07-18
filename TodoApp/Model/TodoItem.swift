@@ -8,7 +8,7 @@
 import SwiftUI
 import FileCache
 
-enum Importance: String {
+enum Importance: String, Codable{
     case important = "important"
     case regular = "regular"
     case unimportant = "unimportant"
@@ -44,6 +44,17 @@ struct TodoItem: Identifiable, JSONableItem {
         self.createdAt = createdAt
         self.changedAt = changedAt
         self.category = categorty
+    }
+    init(todoNetwork: TodoNetwork){
+        self.id = String(describing: todoNetwork.id)
+        self.text = todoNetwork.text
+        self.importance = todoNetwork.importance
+        self.deadline = todoNetwork.deadline
+        self.isDone = todoNetwork.done
+        self.color = Color(hex: todoNetwork.color ?? "#FFFFFF")
+        self.createdAt = todoNetwork.createdAt
+        self.changedAt = todoNetwork.changedAt
+        self.category = Color.clear
     }
 }
 
