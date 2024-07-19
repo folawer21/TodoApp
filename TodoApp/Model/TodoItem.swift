@@ -8,10 +8,10 @@
 import SwiftUI
 import FileCache
 
-enum Importance: String, Codable{
+enum Importance: String, Codable {
     case important = "important"
-    case regular = "regular"
-    case unimportant = "unimportant"
+    case regular = "basic"
+    case unimportant = "low"
 }
 
 struct TodoItem: Identifiable, JSONableItem {
@@ -45,15 +45,19 @@ struct TodoItem: Identifiable, JSONableItem {
         self.changedAt = changedAt
         self.category = categorty
     }
-    init(todoNetwork: TodoNetwork){
+    init(todoNetwork: TodoNetwork) {
         self.id = String(describing: todoNetwork.id)
         self.text = todoNetwork.text
-        self.importance = todoNetwork.importance
-        self.deadline = todoNetwork.deadline
+        self.importance = Importance(rawValue: todoNetwork.importance) ?? .regular
+        if let deadline = todoNetwork.deadline {
+            self.deadline = Date(timeIntervalSince1970: Double(deadline))
+        } else {
+            self.deadline = nil
+        }
         self.isDone = todoNetwork.done
         self.color = Color(hex: todoNetwork.color ?? "#FFFFFF")
-        self.createdAt = todoNetwork.createdAt
-        self.changedAt = todoNetwork.changedAt
+        self.createdAt = Date(timeIntervalSince1970: Double(todoNetwork.createdAt))
+        self.changedAt = Date(timeIntervalSince1970: Double(todoNetwork.changedAt))
         self.category = Color.clear
     }
 }

@@ -39,6 +39,5 @@ extension URLSession {
             onCancel: { [weak task] in
                 task?.cancel()
             })
-        
     }
 }
