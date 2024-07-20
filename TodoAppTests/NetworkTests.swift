@@ -34,4 +34,9 @@ final class NetworkTests: XCTestCase {
             XCTAssertEqual((error as? URLError)?.code, mockError.code)
         }
     }
+    func testGetTodoList() async throws {
+        let networkService = NetworkService()
+        let todoList = try await networkService.getTodoList()
+        
+    }
 }

@@ -168,7 +168,7 @@ extension CalendarView: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let date = dates[section]
-        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HeaderViewKit.reuseIdentifier) as? HeaderViewKit else{
+        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HeaderViewKit.reuseIdentifier) as? HeaderViewKit else {
             return HeaderViewKit()
         }
         headerView.setup(text: date)
@@ -183,14 +183,20 @@ extension CalendarView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(
+        _ tableView: UITableView,
+        leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
         let done = UIContextualAction(style: .normal, title: "Done") { [weak self] (_, _, _) in
             self?.markAsDone(indexPath: indexPath)
         }
         done.backgroundColor = .green
         return UISwipeActionsConfiguration(actions: [done])
     }
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
         let unDone = UIContextualAction(style: .normal, title: "Undone") { [weak self] (_, _, _) in
             self?.markIsUnDone(indexPath: indexPath)
         }

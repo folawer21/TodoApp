@@ -8,10 +8,12 @@
 import Foundation
 import FileCache
 import CocoaLumberjackSwift
-
+import Combine
 final class TaskManager: ObservableObject {
     private var fileCache = FileCache<TodoItem>()
+    private let store = TodoNetworkStore.shared
     @Published private(set) var todoitems: [TodoItem]
+    private var cancellables = Set<AnyCancellable>()
     var uncompletedTodoitems: [TodoItem] {
             todoitems.filter {$0.isDone == false}
     }
@@ -24,6 +26,13 @@ final class TaskManager: ObservableObject {
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         outputFormatter.dateFormat = "d MMMM"
         outputFormatter.locale = Locale(identifier: "ru_RU")
+        TodoNetworkStore.shared.$todos
+                    .receive(on: DispatchQueue.main)
+                    .sink { [weak self] newTodos in
+                        self?.todoitems = newTodos
+                    }
+                    .store(in: &cancellables)
+        store.getTodos()
     }
     func checkIfAlreadyHere(id: String) -> Int? {
         guard let index = todoitems.firstIndex(where: { $0.id == id}) else {
@@ -34,27 +43,27 @@ final class TaskManager: ObservableObject {
     }
     func setItems(items: [TodoItem]) {
         DDLogInfo("Todo's list setted")
-        todoitems = items
+        store.updateTodoList(todoList: items)
     }
     func addNewItem(item: TodoItem) {
-        if let index = checkIfAlreadyHere(id: item.id) {
+        if let _ = checkIfAlreadyHere(id: item.id) {
             DDLogWarn("Todo didn't added because item with id = \(item.id) is already here")
-            todoitems[index] = item
+            store.changeTodo(todoItem: item)
         } else {
             DDLogInfo("New todo added")
-            todoitems.append(item)
+            store.addTodoItem(todoItem: item)
         }
     }
     func removeItem(item: TodoItem) {
         DDLogInfo("Todo with id = \(item.id) removed")
-        todoitems.removeAll(where: {$0.id == item.id})
+        store.deleteTodo(id: item.id)
     }
     func removeItemById(id: String) {
         if id == "" {
             DDLogWarn("Id is empty. Todo item isn't removed")
         }
         DDLogInfo("Todo with id = \(id) removed")
-        todoitems.removeAll(where: {$0.id == id})
+        store.deleteTodo(id: id)
     }
     func getDoneCount() -> Int {
         return todoitems.filter {
@@ -86,7 +95,7 @@ final class TaskManager: ObservableObject {
             changedAt: Date(),
             categorty: old.category
         )
-        todoitems[index] = new
+        store.changeTodo(todoItem: new)
         DDLogInfo("Todo with id = \(id) is completed = \(complete)")
     }
     func getCollectionByDate() -> [String: [TodoItem]] {
