@@ -44,7 +44,6 @@ final class TaskManager: ObservableObject {
     func setItems(items: [TodoItem]) {
         DDLogInfo("Todo's list setted")
         store.updateTodoList(todoList: items)
-//        todoitems = items
     }
     func addNewItem(item: TodoItem) {
         if let _ = checkIfAlreadyHere(id: item.id) {
@@ -52,13 +51,11 @@ final class TaskManager: ObservableObject {
             store.changeTodo(todoItem: item)
         } else {
             DDLogInfo("New todo added")
-//            todoitems.append(item)
             store.addTodoItem(todoItem: item)
         }
     }
     func removeItem(item: TodoItem) {
         DDLogInfo("Todo with id = \(item.id) removed")
-//        todoitems.removeAll(where: {$0.id == item.id})
         store.deleteTodo(id: item.id)
     }
     func removeItemById(id: String) {
@@ -66,7 +63,6 @@ final class TaskManager: ObservableObject {
             DDLogWarn("Id is empty. Todo item isn't removed")
         }
         DDLogInfo("Todo with id = \(id) removed")
-//        todoitems.removeAll(where: {$0.id == id})
         store.deleteTodo(id: id)
     }
     func getDoneCount() -> Int {
@@ -99,7 +95,6 @@ final class TaskManager: ObservableObject {
             changedAt: Date(),
             categorty: old.category
         )
-//        todoitems[index] = new
         store.changeTodo(todoItem: new)
         DDLogInfo("Todo with id = \(id) is completed = \(complete)")
     }
