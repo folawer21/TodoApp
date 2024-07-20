@@ -9,8 +9,6 @@ import Foundation
 import FileCache
 import CocoaLumberjackSwift
 import Combine
-
-
 final class TaskManager: ObservableObject {
     private var fileCache = FileCache<TodoItem>()
     private let store = TodoNetworkStore.shared
@@ -49,7 +47,7 @@ final class TaskManager: ObservableObject {
 //        todoitems = items
     }
     func addNewItem(item: TodoItem) {
-        if let index = checkIfAlreadyHere(id: item.id) {
+        if let _ = checkIfAlreadyHere(id: item.id) {
             DDLogWarn("Todo didn't added because item with id = \(item.id) is already here")
             store.changeTodo(todoItem: item)
         } else {

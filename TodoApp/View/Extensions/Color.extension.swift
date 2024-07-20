@@ -18,7 +18,6 @@ extension Color {
         let hexString = String(format: "#%02X%02X%02X", Int(red * 255), Int(green * 255), Int(blue * 255))
         return hexString
     }
-    
     init(hex: String) {
             let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
             var int: UInt64 = 0
@@ -34,7 +33,6 @@ extension Color {
             default:
                 (alpha, red, green, blue) = (1, 1, 1, 0)
             }
-
             self.init(
                 .sRGB,
                 red: Double(red) / 255,

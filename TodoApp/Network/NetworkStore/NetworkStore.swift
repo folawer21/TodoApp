@@ -7,7 +7,7 @@
 
 import Foundation
 protocol NetworkStore: AnyObject {
-    func getTodos() -> [TodoItem]
+    func getTodos()
     func getTodoById(id: String) -> TodoItem?
     func changeTodo(todoItem: TodoItem)
     func deleteTodo(id: String)

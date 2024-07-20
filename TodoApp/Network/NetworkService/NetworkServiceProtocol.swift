@@ -15,4 +15,3 @@ protocol NetworkServiceProtocol: AnyObject {
     func addTodoItem(todoItem: TodoItem) async throws
     func updateTodoList(todoList: [TodoItem]) async throws -> [TodoItem]
 }
-

@@ -25,7 +25,6 @@ final class NetworkService: NetworkServiceProtocol {
                 let todoListResponse = try decoder.decode(GetTodoListResponse.self, from: data)
                 let revisionResponse = todoListResponse.revision
                 self.revision = revisionResponse
-                print(revisionResponse)
                 let todoListNetwork = todoListResponse.list
                 let todoList = todoListNetwork.map {
                     TodoItem(todoNetwork: $0)
@@ -83,7 +82,6 @@ final class NetworkService: NetworkServiceProtocol {
                     let todoItemNetwork = todoItemResponse.element
                     self.revision = revisionResponse
                     let todoItem = TodoItem(todoNetwork: todoItemNetwork)
-                    print(todoItem)
                     return todoItem
                 } catch {
                     throw NetworkServiceErrors.decodingUnsuccessful
@@ -103,8 +101,6 @@ final class NetworkService: NetworkServiceProtocol {
             let (data, response) = try await URLSession.shared.dataTask(for: urlRequest)
             guard let responseHTTP = response  as? HTTPURLResponse,
                   responseHTTP.statusCode == 200 else {
-                print("badResponse: ")
-                print(response)
                 throw NetworkServiceErrors.badResponse
             }
             do {
@@ -115,32 +111,24 @@ final class NetworkService: NetworkServiceProtocol {
                 let todoItem = TodoItem(todoNetwork: todoItemNetwork)
                 return todoItem
             } catch {
-                print("decodingUnsuccessful: ",error)
                 throw NetworkServiceErrors.decodingUnsuccessful
             }
         } catch {
-            print("urlSessionError: ",error)
             throw NetworkServiceErrors.urlSessionError
         }
     }
     func addTodoItem(todoItem: TodoItem) async throws {
         let todoNetwork = TodoNetwork(from: todoItem)
-        print("todoNetwork: ", todoNetwork)
         guard var request = addTodoItemByIdURLRequest() else {
             throw NetworkServiceErrors.invalidHTTPRequest
         }
-        print("add revision: " ,revision)
         let todoResponse = TodoBodyResponse(element: todoNetwork)
-        print("TodoResponse: ", todoResponse)
         do {
             request.httpBody = try encoder.encode(todoResponse)
             do {
                 let (data, response) = try await URLSession.shared.dataTask(for: request)
                 guard let responseHTTP = response  as? HTTPURLResponse,
                       responseHTTP.statusCode == 200 else {
-                    print("data: ",request.httpBody)
-                    print(try? decoder.decode(TodoBodyResponse.self, from: request.httpBody ?? Data()))
-                    print("badResponse: \(response)")
                     throw NetworkServiceErrors.badResponse
                 }
                 do {
@@ -151,11 +139,9 @@ final class NetworkService: NetworkServiceProtocol {
                     throw NetworkServiceErrors.decodingUnsuccessful
                 }
             } catch {
-                print("urlSessionError: \(error)")
                 throw NetworkServiceErrors.urlSessionError
             }
         } catch {
-            print("Error encoding todoResponse: \(error)")
             throw NetworkServiceErrors.encodingUnsuccessful
         }
     }
@@ -177,7 +163,7 @@ final class NetworkService: NetworkServiceProtocol {
                     let todoItemResponse =  try decoder.decode(GetTodoListResponse.self, from: data)
                     let revisionResponse = todoItemResponse.revision
                     let todoItemsNetwork = todoItemResponse.list
-                    let todoItems = todoItemsNetwork.map{ TodoItem(todoNetwork: $0) }
+                    let todoItems = todoItemsNetwork.map { TodoItem(todoNetwork: $0) }
                     self.revision = revisionResponse
                     return todoItems
                 } catch {
