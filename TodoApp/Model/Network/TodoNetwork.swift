@@ -8,7 +8,7 @@
 import Foundation
 
 struct TodoNetwork: Codable {
-    let id: UUID
+    let id: String
     let text: String
     let importance: String
     let deadline: Int64?
@@ -31,9 +31,9 @@ struct TodoNetwork: Codable {
         case lastUpdatedBy = "last_updated_by"
     }
     init(from item: TodoItem) {
-        self.id = UUID(uuidString: item.id) ?? UUID()
+        self.id = item.id
         self.text = item.text
-        self.importance = String(describing: item.importance)
+        self.importance = item.importance.rawValue
         if let deadline = item.deadline {
             self.deadline = Int64(deadline.timeIntervalSince1970)
         } else {

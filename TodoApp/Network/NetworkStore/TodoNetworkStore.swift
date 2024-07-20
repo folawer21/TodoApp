@@ -6,38 +6,39 @@
 //
 
 import Foundation
+import Combine
 
-final class TodoNetworkStore: ObservableObject, NetworkStore {
-    let shared = TodoNetworkStore(service: NetworkService())
+final class TodoNetworkStore: NetworkStore {
+    static let shared = TodoNetworkStore(service: NetworkService())
     init(service: NetworkServiceProtocol) {
         self.service = service
         self.todos = []
     }
     private var service: NetworkServiceProtocol
-    @Published var todos: [TodoItem]
+    @Published private(set) var todos: [TodoItem]
     
-    func checkIfAlreadyHere(id: String) -> Int? {
+    private func checkIfAlreadyHere(id: String) -> Int? {
         guard let index = todos.firstIndex(where: { $0.id == id}) else {
             return nil
         }
         return index
     }
-    func getTodo(id: String) -> TodoItem? {
+    private func getTodo(id: String) -> TodoItem? {
         return todos.first(where: {$0.id == id })
     }
-    func setTodos(todos: [TodoItem]) {
+    private func setTodos(todos: [TodoItem]) {
         self.todos = todos
     }
-    func setTodo(todo: TodoItem) {
+    private func setTodo(todo: TodoItem) {
         guard let firstIndex = todos.firstIndex(where: {$0.id == todo.id}) else {
             return
         }
         todos[firstIndex] = todo
     }
-    func removeTodo(id: String){
+    private func removeTodo(id: String){
         todos.removeAll(where: {$0.id == id})
     }
-    func appendTodo(todoItem: TodoItem){
+    private func appendTodo(todoItem: TodoItem){
         todos.append(todoItem)
     }
     func getTodos() -> [TodoItem] {
@@ -55,6 +56,7 @@ final class TodoNetworkStore: ObservableObject, NetworkStore {
         Task {
             do {
                 let todo = try await service.getTodoItemById(id: id )
+                setTodo(todo: todo)
             } catch {
                 print(error)
             }
@@ -66,7 +68,6 @@ final class TodoNetworkStore: ObservableObject, NetworkStore {
         Task {
             do {
                 let _ = try await service.changeTodoItemById(todoItem: todoItem)
-                
             } catch {
                 print(error)
             }
@@ -80,7 +81,6 @@ final class TodoNetworkStore: ObservableObject, NetworkStore {
         Task {
             do {
                 let _ = try await service.deleteTodoItemById(id: id)
-                
             } catch {
                 print(error)
             }
