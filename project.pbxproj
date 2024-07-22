@@ -21,6 +21,7 @@
 		3E33C7E42C374FB40087F2D8 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E33C7D42C374FB40087F2D8 /* CalendarView.swift */; };
 		3E33C7E72C37522A0087F2D8 /* UILabel.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E33C7E62C37522A0087F2D8 /* UILabel.extension.swift */; };
 		3E33C7EE2C384BE60087F2D8 /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E33C7ED2C384BE60087F2D8 /* CategoryPicker.swift */; };
+		3E4758CB2C4E89B900919EA5 /* FileCache in Frameworks */ = {isa = PBXBuildFile; productRef = 3E4758CA2C4E89B900919EA5 /* FileCache */; };
 		3EB9472C2C49A751004B89C2 /* NetworkDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB9472B2C49A751004B89C2 /* NetworkDefault.swift */; };
 		3EB947302C49A839004B89C2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB9472F2C49A839004B89C2 /* NetworkService.swift */; };
 		3EB947322C4B108B004B89C2 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB947312C4B108B004B89C2 /* NetworkServiceProtocol.swift */; };
@@ -120,6 +121,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E0D94E52C3F3A25007D490B /* CocoaLumberjackSwift in Frameworks */,
+				3E4758CB2C4E89B900919EA5 /* FileCache in Frameworks */,
 				3E0D94E72C3F3A25007D490B /* CocoaLumberjackSwiftLogBackend in Frameworks */,
 				3E0D94E32C3F3A25007D490B /* CocoaLumberjack in Frameworks */,
 			);
@@ -394,6 +396,7 @@
 				3E0D94E22C3F3A25007D490B /* CocoaLumberjack */,
 				3E0D94E42C3F3A25007D490B /* CocoaLumberjackSwift */,
 				3E0D94E62C3F3A25007D490B /* CocoaLumberjackSwiftLogBackend */,
+				3E4758CA2C4E89B900919EA5 /* FileCache */,
 			);
 			productName = TodoApp;
 			productReference = 3EED72EA2C1F2BF000B55F2F /* TodoApp.app */;
@@ -877,6 +880,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3E0D94E12C3F3A25007D490B /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
 			productName = CocoaLumberjackSwiftLogBackend;
+		};
+		3E4758CA2C4E89B900919EA5 /* FileCache */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3E4758C52C4E875600919EA5 /* XCRemoteSwiftPackageReference "FileCache" */;
+			productName = FileCache;
 		};
 /* End XCSwiftPackageProductDependency section */
 
