@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -21,7 +21,6 @@
 		3E33C7E42C374FB40087F2D8 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E33C7D42C374FB40087F2D8 /* CalendarView.swift */; };
 		3E33C7E72C37522A0087F2D8 /* UILabel.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E33C7E62C37522A0087F2D8 /* UILabel.extension.swift */; };
 		3E33C7EE2C384BE60087F2D8 /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E33C7ED2C384BE60087F2D8 /* CategoryPicker.swift */; };
-		3E933B132C4E823900BB522C /* FileCache in Frameworks */ = {isa = PBXBuildFile; productRef = 3E933B122C4E823900BB522C /* FileCache */; };
 		3EB9472C2C49A751004B89C2 /* NetworkDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB9472B2C49A751004B89C2 /* NetworkDefault.swift */; };
 		3EB947302C49A839004B89C2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB9472F2C49A839004B89C2 /* NetworkService.swift */; };
 		3EB947322C4B108B004B89C2 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB947312C4B108B004B89C2 /* NetworkServiceProtocol.swift */; };
@@ -63,7 +62,6 @@
 
 /* Begin PBXFileReference section */
 		1BC81CDE3807522B47807DB5 /* Pods-TodoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApp.release.xcconfig"; path = "Target Support Files/Pods-TodoApp/Pods-TodoApp.release.xcconfig"; sourceTree = "<group>"; };
-		3E0D94F22C3F4DBE007D490B /* FileCache */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = FileCache; path = ../FileCache; sourceTree = "<group>"; };
 		3E0D95632C41C143007D490B /* URLSession+dataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+dataTask.swift"; sourceTree = "<group>"; };
 		3E0D956A2C41C192007D490B /* TodoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E0D956C2C41C192007D490B /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
@@ -122,7 +120,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E0D94E52C3F3A25007D490B /* CocoaLumberjackSwift in Frameworks */,
-				3E933B132C4E823900BB522C /* FileCache in Frameworks */,
 				3E0D94E72C3F3A25007D490B /* CocoaLumberjackSwiftLogBackend in Frameworks */,
 				3E0D94E32C3F3A25007D490B /* CocoaLumberjack in Frameworks */,
 			);
@@ -302,7 +299,6 @@
 		3EED72E12C1F2BF000B55F2F = {
 			isa = PBXGroup;
 			children = (
-				3E0D94F22C3F4DBE007D490B /* FileCache */,
 				3EED72EC2C1F2BF000B55F2F /* TodoApp */,
 				3E0D956B2C41C192007D490B /* TodoAppTests */,
 				3EED72EB2C1F2BF000B55F2F /* Products */,
@@ -398,7 +394,6 @@
 				3E0D94E22C3F3A25007D490B /* CocoaLumberjack */,
 				3E0D94E42C3F3A25007D490B /* CocoaLumberjackSwift */,
 				3E0D94E62C3F3A25007D490B /* CocoaLumberjackSwiftLogBackend */,
-				3E933B122C4E823900BB522C /* FileCache */,
 			);
 			productName = TodoApp;
 			productReference = 3EED72EA2C1F2BF000B55F2F /* TodoApp.app */;
@@ -434,7 +429,7 @@
 			mainGroup = 3EED72E12C1F2BF000B55F2F;
 			packageReferences = (
 				3E0D94E12C3F3A25007D490B /* XCRemoteSwiftPackageReference "CocoaLumberjack" */,
-				3E0D94EB2C3F4B60007D490B /* XCLocalSwiftPackageReference "../FileCache" */,
+				3E4758C52C4E875600919EA5 /* XCRemoteSwiftPackageReference "FileCache" */,
 			);
 			productRefGroup = 3EED72EB2C1F2BF000B55F2F /* Products */;
 			projectDirPath = "";
@@ -848,13 +843,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		3E0D94EB2C3F4B60007D490B /* XCLocalSwiftPackageReference "../FileCache" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../FileCache;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		3E0D94E12C3F3A25007D490B /* XCRemoteSwiftPackageReference "CocoaLumberjack" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -862,6 +850,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 3.8.5;
+			};
+		};
+		3E4758C52C4E875600919EA5 /* XCRemoteSwiftPackageReference "FileCache" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/folawer21/FileCache";
+			requirement = {
+				branch = main;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -881,11 +877,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3E0D94E12C3F3A25007D490B /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
 			productName = CocoaLumberjackSwiftLogBackend;
-		};
-		3E933B122C4E823900BB522C /* FileCache */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3E0D94EB2C3F4B60007D490B /* XCLocalSwiftPackageReference "../FileCache" */;
-			productName = FileCache;
 		};
 /* End XCSwiftPackageProductDependency section */
 
