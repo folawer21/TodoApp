@@ -1,5 +1,5 @@
 {
-  "originHash" : "13392ef445ea3b896258b7de5eb0d5088d244e56fe937ba50d151491a65322f9",
+  "originHash" : "c078e7f014762b30e95e3d945cc911d0666c0d9dd493b8512e88725c5ab2b9b6",
   "pins" : [
     {
       "identity" : "cocoalumberjack",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "4b8714a7fb84d42393314ce897127b3939885ec3",
         "version" : "3.8.5"
+      }
+    },
+    {
+      "identity" : "filecache",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/folawer21/FileCache",
+      "state" : {
+        "branch" : "main",
+        "revision" : "bd0328102adb6493c12d8d31523486397f95ca66"
       }
     },
     {
