@@ -6,11 +6,10 @@
 //
 
 import Foundation
-import FileCache
 import CocoaLumberjackSwift
 import Combine
 final class TaskManager: ObservableObject {
-    private var fileCache = FileCache<TodoItem>()
+    private var fileCache = FileCacheSD()
     private let store = TodoNetworkStore.shared
     @Published private(set) var todoitems: [TodoItem]
     private var cancellables = Set<AnyCancellable>()
@@ -52,11 +51,13 @@ final class TaskManager: ObservableObject {
         } else {
             DDLogInfo("New todo added")
             store.addTodoItem(todoItem: item)
+            fileCache.addNewItem(item: item)
         }
     }
     func removeItem(item: TodoItem) {
         DDLogInfo("Todo with id = \(item.id) removed")
         store.deleteTodo(id: item.id)
+        fileCache.removeItem(item: item)
     }
     func removeItemById(id: String) {
         if id == "" {
@@ -96,6 +97,7 @@ final class TaskManager: ObservableObject {
             categorty: old.category
         )
         store.changeTodo(todoItem: new)
+        fileCache.updateItem(item: new)
         DDLogInfo("Todo with id = \(id) is completed = \(complete)")
     }
     func getCollectionByDate() -> [String: [TodoItem]] {

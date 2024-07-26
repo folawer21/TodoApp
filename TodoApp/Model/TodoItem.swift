@@ -60,6 +60,18 @@ struct TodoItem: Identifiable, JSONableItem {
         self.changedAt = Date(timeIntervalSince1970: Double(todoNetwork.changedAt))
         self.category = Color.clear
     }
+    
+    init(from item: TodoItemSwiftData) {
+        self.id = item.id
+        self.text = item.text
+        self.importance = item.importance
+        self.deadline = item.deadline
+        self.isDone = item.isDone
+        self.color = item.color
+        self.createdAt = item.createdAt
+        self.changedAt = item.changedAt
+        self.category = item.category
+    }
 }
 
 extension TodoItem {
