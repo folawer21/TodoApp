@@ -41,7 +41,7 @@ struct TodoNetwork: Codable {
         }
         self.files = nil
         self.done = item.isDone
-        self.color = item.color.hexString()
+        self.color = item.color
         self.createdAt = Int64(item.createdAt.timeIntervalSince1970)
         self.changedAt = Int64((item.changedAt ?? item.createdAt).timeIntervalSince1970)
         self.lastUpdatedBy = NetworkDefault.deviceId

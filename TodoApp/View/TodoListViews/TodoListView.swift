@@ -23,10 +23,10 @@ struct TodoList: View {
                                     isCompleted: item.isDone,
                                     importance: item.importance,
                                     itemText: item.text,
-                                    color: item.color,
+                                    color: Color(hex: item.color) ,
                                     isHasDeadline: item.deadline != nil ? true : false,
                                     deadline: item.deadline ?? Date(),
-                                    categoty: item.category
+                                    categoty: Color(hex: item.category) 
                                 )
                                     .environmentObject(taskManager)
                             }

@@ -22,6 +22,9 @@
 		3E33C7E72C37522A0087F2D8 /* UILabel.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E33C7E62C37522A0087F2D8 /* UILabel.extension.swift */; };
 		3E33C7EE2C384BE60087F2D8 /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E33C7ED2C384BE60087F2D8 /* CategoryPicker.swift */; };
 		3E4758CB2C4E89B900919EA5 /* FileCache in Frameworks */ = {isa = PBXBuildFile; productRef = 3E4758CA2C4E89B900919EA5 /* FileCache */; };
+		3E4758F72C543E1000919EA5 /* TodoItemSwiftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4758F62C543E1000919EA5 /* TodoItemSwiftData.swift */; };
+		3E4758F92C5449A100919EA5 /* FileCacheSD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4758F82C5449A100919EA5 /* FileCacheSD.swift */; };
+		3E4758FB2C544D7D00919EA5 /* SwiftDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4758FA2C544D7D00919EA5 /* SwiftDataManager.swift */; };
 		3EB9472C2C49A751004B89C2 /* NetworkDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB9472B2C49A751004B89C2 /* NetworkDefault.swift */; };
 		3EB947302C49A839004B89C2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB9472F2C49A839004B89C2 /* NetworkService.swift */; };
 		3EB947322C4B108B004B89C2 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB947312C4B108B004B89C2 /* NetworkServiceProtocol.swift */; };
@@ -75,6 +78,9 @@
 		3E33C7D42C374FB40087F2D8 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		3E33C7E62C37522A0087F2D8 /* UILabel.extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel.extension.swift; sourceTree = "<group>"; };
 		3E33C7ED2C384BE60087F2D8 /* CategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPicker.swift; sourceTree = "<group>"; };
+		3E4758F62C543E1000919EA5 /* TodoItemSwiftData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemSwiftData.swift; sourceTree = "<group>"; };
+		3E4758F82C5449A100919EA5 /* FileCacheSD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCacheSD.swift; sourceTree = "<group>"; };
+		3E4758FA2C544D7D00919EA5 /* SwiftDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataManager.swift; sourceTree = "<group>"; };
 		3EB9472B2C49A751004B89C2 /* NetworkDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDefault.swift; sourceTree = "<group>"; };
 		3EB9472F2C49A839004B89C2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		3EB947312C4B108B004B89C2 /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
@@ -241,8 +247,10 @@
 		3E33C7EA2C3841500087F2D8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3E4758F52C543DFD00919EA5 /* SwiftData */,
 				3EB947332C4B114F004B89C2 /* Network */,
 				3EED73192C21F7F300B55F2F /* TodoItem.swift */,
+				3E4758F82C5449A100919EA5 /* FileCacheSD.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -261,6 +269,15 @@
 				3EED73862C2F4B2500B55F2F /* TaskManager.swift */,
 			);
 			path = "Data Managers";
+			sourceTree = "<group>";
+		};
+		3E4758F52C543DFD00919EA5 /* SwiftData */ = {
+			isa = PBXGroup;
+			children = (
+				3E4758F62C543E1000919EA5 /* TodoItemSwiftData.swift */,
+				3E4758FA2C544D7D00919EA5 /* SwiftDataManager.swift */,
+			);
+			path = SwiftData;
 			sourceTree = "<group>";
 		};
 		3EB9472D2C49A81E004B89C2 /* NetworkDefault */ = {
@@ -536,7 +553,9 @@
 				3EED737B2C2E0AEA00B55F2F /* View.extension.swift in Sources */,
 				3EED736F2C2CDFED00B55F2F /* TodoRow.swift in Sources */,
 				3E33C7DB2C374FB40087F2D8 /* Colors.swift in Sources */,
+				3E4758FB2C544D7D00919EA5 /* SwiftDataManager.swift in Sources */,
 				3EED736B2C2CD28400B55F2F /* MainView.swift in Sources */,
+				3E4758F72C543E1000919EA5 /* TodoItemSwiftData.swift in Sources */,
 				3EED73752C2DF4E600B55F2F /* NewItemRowView.swift in Sources */,
 				3E33C7E72C37522A0087F2D8 /* UILabel.extension.swift in Sources */,
 				3EED731A2C21F7F300B55F2F /* TodoItem.swift in Sources */,
@@ -549,6 +568,7 @@
 				3EED731F2C26116800B55F2F /* FileCache.swift in Sources */,
 				3EED73732C2DAD3300B55F2F /* CompleteButton.swift in Sources */,
 				3EED72F82C1F2BF000B55F2F /* TodoApp.xcdatamodeld in Sources */,
+				3E4758F92C5449A100919EA5 /* FileCacheSD.swift in Sources */,
 				3EB9473C2C4B1804004B89C2 /* TodoNetworkStore.swift in Sources */,
 				3EED73792C2E057A00B55F2F /* PlusButton.swift in Sources */,
 				3E0D95642C41C143007D490B /* URLSession+dataTask.swift in Sources */,

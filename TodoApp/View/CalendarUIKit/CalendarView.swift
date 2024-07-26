@@ -140,7 +140,7 @@ extension CalendarView: UITableViewDataSource {
         cell.label.text = item.text
         cell.layer.masksToBounds = true
         cell.contentView.layer.masksToBounds = true
-        cell.circleView.backgroundColor = UIColor(item.category)
+        cell.circleView.backgroundColor = UIColor(Color(hex: item.category))
         if indexPath.row == 0 {
             if items.count == 1 {
                 cell.contentView.layer.cornerRadius = 15

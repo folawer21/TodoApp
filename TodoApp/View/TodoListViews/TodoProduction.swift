@@ -133,13 +133,13 @@ struct TodoProduction: View {
                         let item = TodoItem(
                             id: id ?? UUID().uuidString,
                             text: text,
-                            color: selectedColor.opacity(selectedBrightness),
+                            color: selectedColor.opacity(selectedBrightness).hexString(),
                             importance: selectedImportance,
                             deadline: toggleOn ? deadline : nil,
                             isDone: false,
                             createdAt: Date(),
                             changedAt: nil,
-                            categorty: selectedCategory
+                            categorty: selectedCategory.hexString()
                         )
                         taskManager.addNewItem(item: item)
                         self.delegate?.screenWasClosen()
