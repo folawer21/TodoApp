@@ -7,8 +7,6 @@
 
 import Foundation
 import SwiftData
-
-
 final class SwiftDataManager {
     let container: ModelContainer
     let context: ModelContext
@@ -16,7 +14,6 @@ final class SwiftDataManager {
         self.container = try ModelContainer(for: TodoItemSwiftData.self, configurations: ModelConfiguration())
         self.context = ModelContext(self.container)
     }
-
     func insert(_ todoItem: TodoItem) {
         let todoItemSD = TodoItemSwiftData(from: todoItem)
         context.insert(todoItemSD)
@@ -24,7 +21,7 @@ final class SwiftDataManager {
     func fetch() -> [TodoItem] {
         do {
             let data = try context.fetch(FetchDescriptor<TodoItemSwiftData>())
-            return data.map{TodoItem(from: $0)}
+            return data.map{ TodoItem(from: $0) }
         } catch {
             print(error)
             return []

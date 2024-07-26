@@ -20,20 +20,20 @@ struct TodoItem: Identifiable, JSONableItem {
     let importance: Importance
     let deadline: Date?
     let isDone: Bool
-    let color: Color
+    let color: String
     let createdAt: Date
     let changedAt: Date?
-    let category: Color
+    let category: String
     init(
         id: String = UUID().uuidString,
         text: String,
-        color: Color,
+        color: String,
         importance: Importance,
         deadline: Date?,
         isDone: Bool,
         createdAt: Date,
         changedAt: Date?,
-        categorty: Color
+        categorty: String
     ) {
         self.id = id
         self.text = text
@@ -55,12 +55,11 @@ struct TodoItem: Identifiable, JSONableItem {
             self.deadline = nil
         }
         self.isDone = todoNetwork.done
-        self.color = Color(hex: todoNetwork.color ?? "#FFFFFF")
+        self.color = todoNetwork.color ?? "#FFFFFF"
         self.createdAt = Date(timeIntervalSince1970: Double(todoNetwork.createdAt))
         self.changedAt = Date(timeIntervalSince1970: Double(todoNetwork.changedAt))
-        self.category = Color.clear
+        self.category = Color.clear.hexString()
     }
-    
     init(from item: TodoItemSwiftData) {
         self.id = item.id
         self.text = item.text
@@ -83,8 +82,8 @@ static func parse(json: Any) -> TodoItem? {
         guard let importance = Importance(rawValue: importanceRawValue) else {return nil}
         guard let deadline = jsonObject["deadline"] as? Date? else {return nil}
         guard let isDone = jsonObject["isDone"] as? Bool else {return nil}
-        guard let color = jsonObject["color"] as? Color else {return nil}
-        guard let category = jsonObject["category"] as? Color else {return nil}
+        guard let color = jsonObject["color"] as? String else {return nil}
+        guard let category = jsonObject["category"] as? String else {return nil}
         let createdAt = Date()
         let changedAt: Date? = nil
     let todoItem = TodoItem(

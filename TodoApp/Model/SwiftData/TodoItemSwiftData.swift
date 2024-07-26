@@ -16,10 +16,10 @@ final class TodoItemSwiftData {
     let importance: Importance
     let deadline: Date?
     let isDone: Bool
-    let color: Color
+    let color: String
     let createdAt: Date
     let changedAt: Date?
-    let category: Color
+    let category: String
     init(from item: TodoItem) {
         self.id = item.id
         self.text = item.text
